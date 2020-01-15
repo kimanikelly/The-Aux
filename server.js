@@ -8,17 +8,29 @@ require('dotenv').config();
 // Imports the express module
 var express = require('express');
 
+// Imports the mongoose module
+var mongoose = require('mongoose');
+
 // Tells node that an express server is being created
 var app = express();
 
 // Sets the port the express server will be running on
 var PORT = process.env.PORT = 3000;
 
+// Imports the passport module
+var passport = require('passport');
+
+// Allows use of the passport Spotify OAuth Strategy
+var SpotifyStrategy = require('passport-spotify').Strategy;
+
 // Imports the Spotify credentials 
 var spotifyId = require('./spotifyCredentials');
 
 // Stores the Spotify client id
 var clientId = spotifyId.credentials.id;
+
+// Stores the Spotify secret id
+var clientSecret = spotifyId.credentials.secret;
 
 // Stores the Spotify redirect uri
 var redirectUri = spotifyId.credentials.redirectUri;
@@ -28,20 +40,39 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 
-app.get('/login', function (req, res) {
-    console.log(clientId);
-    console.log(redirectUri);
-    var scopes = 'user-read-private user-read-email';
-    res.redirect('https://accounts.spotify.com/authorize' +
-        '?response_type=code' +
-        '&client_id=' + clientId +
-        (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-        '&redirect_uri=' + encodeURIComponent(redirectUri));
+passport.use(
+    new SpotifyStrategy(
+        {
+            clientID: clientId,
+            clientSecret: clientSecret,
+            callbackURL: redirectUri
+        },
+        function (accessToken, refreshToken, expires_in, profile, done) {
+            User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
+
+                return done(err, user);
+            });
+        }
+    )
+);
+
+
+app.get('/auth/spotify', passport.authenticate('spotify', {
+    scope: ['user-read-email', 'user-read-private']
+}), function (req, res) {
+    // The request will be redirected to spotify for authentication, so this
+    // function will not be called.
 });
 
-app.get('/home', function (req, res) {
-    res.json('This is working')
-})
+app.get(
+    '/auth/spotify/callback',
+    passport.authenticate('spotify', { failureRedirect: '/login' }),
+    function (req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/');
+    }
+);
+
 
 // Starts the express server
 app.listen(PORT, function () {
