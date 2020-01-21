@@ -39,7 +39,6 @@ var redirectUri = spotifyId.credentials.redirectUri;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 passport.use(
     new SpotifyStrategy(
         {
@@ -52,10 +51,10 @@ passport.use(
 
                 return done(err, user);
             });
+            console.log(spotifyId);
         }
     )
 );
-
 
 app.get('/auth/spotify', passport.authenticate('spotify', {
     scope: ['user-read-email', 'user-read-private']
@@ -73,8 +72,12 @@ app.get(
     }
 );
 
-
 // Starts the express server
 app.listen(PORT, function () {
-    console.log('Connected on port:' + PORT);
+    // MongoDB connection
+    mongoose.connect('mongodb://localhost/spotify_users', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    });
+    console.log('Connected on port:' + PORT + ' MongoDB connected');
 });
