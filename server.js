@@ -1,32 +1,27 @@
-// Requiring the path module as a dependency
+// Loads the path module as a dependency
+// Provides a way to work with filepaths and directories
 var path = require('path');
 
-// Loads environment variables from the .env file into process.env
-// Configures dotenv
-require('dotenv').config();
-
-// Imports the express module
-var express = require('express');
-
-// Imports the mongoose module
-var mongoose = require('mongoose');
-
-// Tells node that an express server is being created
-var app = express();
-
-// Sets the port the express server will be running on
-var PORT = process.env.PORT = 3000;
-
-// Imports the passport module
+// Loads the passport module as a dependency
+// Passport functions and strategies are accessible
+// Authentication middleware for Node.js
 var passport = require('passport');
+
+// Loads the body-parser module as a dependency
+var bodyParser = require('body-parser');
+
+// Loads environment variables from the .env file into process.env
+// Configures the dotenv module
+require('dotenv').config();
 
 // Allows use of the passport Spotify OAuth Strategy
 var SpotifyStrategy = require('passport-spotify').Strategy;
 
-// Imports the Spotify credentials 
+// Imports the spotifyCredentials.js file
+// Returns the object containing the CLIENT_ID, SECRET_ID, REDIRECT_URI
 var spotifyId = require('./spotifyCredentials');
 
-// Stores the Spotify client id
+// Stores the Spotify client Id
 var clientId = spotifyId.credentials.id;
 
 // Stores the Spotify secret id
@@ -35,41 +30,42 @@ var clientSecret = spotifyId.credentials.secret;
 // Stores the Spotify redirect uri
 var redirectUri = spotifyId.credentials.redirectUri;
 
+// Loads the express module as a dependency
+var express = require('express');
+
+// Loads the mongoose module
+var mongoose = require('mongoose');
+
+// Tells node that an express server is being created
+var app = express();
+
+// Sets the port the express server will be running on
+var PORT = process.env.PORT = 3000;
+
 // Epxress middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-passport.use(
-    new SpotifyStrategy(
-        {
-            clientID: clientId,
-            clientSecret: clientSecret,
-            callbackURL: redirectUri
-        },
-        function (accessToken, refreshToken, expires_in, profile, done) {
-            User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
+// Loads the api-routes to server.js
+// Allows for custom API building with Express
+require('./routes/api-routes')(app);
 
-                return done(err, user);
-            });
-            console.log(spotifyId);
-        }
-    )
-);
+passport.use(new SpotifyStrategy(
+    {
+        // The clientID property given the value of the clientId variable(Stores the Spotify CLIENT_ID)
+        clientID: clientId,
+        // The clientSecret propery given the value of the clientSecret variable(Stores the Spotify CLIENT_SECRET)
+        clientSecret: clientSecret,
+        // The callbackURL property given the value of the redirectUri variable(Stores the SPOTIFY_REDIRECT_URI)
+        callbackURL: redirectUri
+    },
+    function (accessToken, refreshToken, expires_in, profile, done) {
+        User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
 
-app.get('/auth/spotify', passport.authenticate('spotify', {
-    scope: ['user-read-email', 'user-read-private']
-}), function (req, res) {
-    // The request will be redirected to spotify for authentication, so this
-    // function will not be called.
-});
-
-app.get(
-    '/auth/spotify/callback',
-    passport.authenticate('spotify', { failureRedirect: '/login' }),
-    function (req, res) {
-        // Successful authentication, redirect home.
-        res.redirect('/');
+            return done(err, user);
+        });
     }
+)
 );
 
 // Starts the express server

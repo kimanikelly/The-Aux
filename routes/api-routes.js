@@ -1,4 +1,8 @@
+// Requiring the passport module as a dependency
+var passport = require('passport');
+
 module.exports = function (app) {
+
     app.get('/auth/spotify', passport.authenticate('spotify', {
         scope: ['user-read-email', 'user-read-private']
     }), function (req, res) {
