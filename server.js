@@ -42,6 +42,8 @@ var app = express();
 // Sets the port the express server will be running on
 var PORT = process.env.PORT = 3000;
 
+var dataBase = require('./models');
+ 
 // Epxress middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -50,11 +52,15 @@ app.use(express.json());
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
 
+
+// Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
         // The clientID property given the value of the clientId variable(Stores the Spotify CLIENT_ID)
+        // The CLIENT_ID was created when the app was registered with Spotify
         clientID: clientId,
         // The clientSecret propery given the value of the clientSecret variable(Stores the Spotify CLIENT_SECRET)
+        // The URI to redirect to after the user grants or denies permission
         clientSecret: clientSecret,
         // The callbackURL property given the value of the redirectUri variable(Stores the SPOTIFY_REDIRECT_URI)
         callbackURL: redirectUri
