@@ -43,7 +43,7 @@ var app = express();
 var PORT = process.env.PORT = 3000;
 
 var dataBase = require('./models');
- 
+
 // Epxress middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -51,7 +51,6 @@ app.use(express.json());
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
-
 
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
@@ -67,19 +66,23 @@ passport.use(new SpotifyStrategy(
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
         User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
-
-            return done(err, user);
+            if (err) {
+                return done(err, user);
+            };
         });
     }
 )
 );
 
+// Connects to the spotify_playlist database in MongoDB
+mongoose.connect('mongodb://localhost:27017/spotify_playlist', { useNewUrlParser: true })
+    .catch(function (err) {
+        if (err) {
+            console.log(err)
+        }
+    });
+
 // Starts the express server
 app.listen(PORT, function () {
-    // MongoDB connection
-    mongoose.connect('mongodb://localhost/spotify_users', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
-    console.log('Connected on port:' + PORT + ' MongoDB connected');
+    console.log('Connected on port:' + PORT);
 });

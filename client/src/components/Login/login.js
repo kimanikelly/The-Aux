@@ -9,9 +9,7 @@ import './style.css';
 class Login extends React.Component {
     render() {
         return (
-            <div>
-                <h1>Testing</h1>
-            </div>
+            <h1>Testing</h1>
         )
     }
 };
