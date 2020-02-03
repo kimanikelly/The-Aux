@@ -19,7 +19,7 @@ class Login extends React.Component {
     };
 
     handleClick(event) {
-        axios.post('http://localhost:3000/auth/spotify')
+        axios.get('http://localhost:3000/auth/spotify')
             .then(function (res) {
                 console.log(res)
                 console.log('The button was clicked')
