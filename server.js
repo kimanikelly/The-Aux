@@ -39,6 +39,14 @@ var mongoose = require('mongoose');
 // Tells node that an express server is being created
 var app = express();
 
+// Loads the cors module
+// Cross Origin Resource Sharing allows data sharing between different domains
+// The two domains exchanging data are port 3000(Server Side) and port 3001(React Side)
+var cors = require('cors');
+
+// Configures express to have access and use cors
+app.use(cors());
+
 // Sets the port the express server will be running on
 var PORT = process.env.PORT = 3000;
 

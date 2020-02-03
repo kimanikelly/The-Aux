@@ -3,6 +3,12 @@ var passport = require('passport');
 
 module.exports = function (app) {
 
+    app.get('/products/:id', function (req, res, next) {
+        res.json({
+            msg: 'This is CORS-enabled for all origins!'
+        })
+    });
+
     // Initiates Oauth transaction and redirects the user to Spotify
     app.get('/auth/spotify', passport.authenticate('spotify', {
 
