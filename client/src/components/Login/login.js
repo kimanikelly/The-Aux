@@ -21,8 +21,8 @@ class Login extends React.Component {
     handleClick(event) {
         axios.get('http://localhost:3000/auth/spotify')
             .then(function (res) {
-                console.log(res)
-                console.log('The button was clicked')
+                console.log(res.data)
+                window.location = 'http://localhost:3000/auth/spotify'
             })
             .catch(function (err) {
                 console.log(err);

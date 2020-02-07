@@ -3,12 +3,9 @@ var passport = require('passport');
 
 module.exports = function (app) {
 
-    // Enable All CORS Requests
-    app.get('/products/:id', function (req, res, next) {
-        res.json({
-            msg: 'This is CORS-enabled for all origins!'
-        });
-    });
+    app.get('/testing', function (req, res) {
+        res.json('HTTP requests between the server and React are working')
+    })
 
     // Initiates Oauth transaction and redirects the user to Spotify
     app.get('/auth/spotify', passport.authenticate('spotify', {
@@ -24,6 +21,7 @@ module.exports = function (app) {
     }), function (req, res) {
         // The request will be redirected to spotify for authentication, so this
         // function will not be called.
+
     });
 
     app.get(
