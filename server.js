@@ -30,11 +30,6 @@ var clientSecret = spotifyId.credentials.secret;
 // Stores the Spotify redirect uri
 var redirectUri = spotifyId.credentials.redirectUri;
 
-// Loads the cors module
-// Cross Origin Resource Sharing allows data sharing between different domains
-// The two domains exchanging data are port 3000(Server Side) and port 3001(React Side)
-var cors = require('cors');
-
 // Loads the express module as a dependency
 var express = require('express');
 
@@ -52,9 +47,6 @@ var dataBase = require('./models');
 // Epxress middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
-// Configures express to have access and use cors
-app.use(cors());
 
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
