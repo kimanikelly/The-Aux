@@ -1,11 +1,9 @@
 // Requiring the passport module as a dependency
 var passport = require('passport');
 
-module.exports = function (app) {
+var userModel = require('../models/User');
 
-    app.get('/testing', function (req, res) {
-        res.json('HTTP requests between the server and React are working')
-    })
+module.exports = function (app) {
 
     // Initiates Oauth transaction and redirects the user to Spotify
     app.get('/auth/spotify', passport.authenticate('spotify', {
@@ -24,13 +22,29 @@ module.exports = function (app) {
 
     });
 
+    app.post('/spotify/user', function (req, res) {
+        var user = new userModel(req.body);
+
+        user.save()
+            .then(function () {
+                res.json({
+                    "Message": "User Added"
+                })
+                console.log(user)
+            })
+            .catch(function (err) {
+                console.log(err);
+            });
+
+    });
+
     app.get(
         '/auth/spotify/callback',
         passport.authenticate('spotify', { failureRedirect: '/' }),
         function (req, res) {
 
             // Successful authentication, redirect home.
-            res.redirect('/');
+            res.redirect('http://google.com');
         }
     );
 
