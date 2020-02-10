@@ -17,29 +17,36 @@ require('dotenv').config();
 // Allows use of the passport Spotify OAuth Strategy
 var SpotifyStrategy = require('passport-spotify').Strategy;
 
-// Imports the spotifyCredentials.js file
-// Returns the object containing the CLIENT_ID, SECRET_ID, REDIRECT_URI
-var spotifyId = require('./spotifyCredentials');
+// Imports the credentials.js file
+// Returns the object containing the CLIENT_ID, SECRET_ID, REDIRECT_URI, MONGO_CONNECTION_PASSWORD 
+var credentials = require('./credentials');
 
 // Stores the Spotify client Id
-var clientId = spotifyId.credentials.id;
+var clientId = credentials.credentials.id;
 
 // Stores the Spotify secret id
-var clientSecret = spotifyId.credentials.secret;
+var clientSecret = credentials.credentials.secret;
 
 // Stores the Spotify redirect uri
-var redirectUri = spotifyId.credentials.redirectUri;
+var redirectUri = credentials.credentials.redirectUri;
+
+// Stores the MongoDB connection string password 
+var mongoConnectionPassword = credentials.credentials.mongoConnectionPassword;
+
+// Creates a new MongoClient instance
+var MongoClient = require('mongodb').MongoClient;
+
+// MongoDB Atlas connection URI containing the mongoConnectionPassword environment variable
+var uri = "mongodb+srv://The-Aux-Kimani:" + mongoConnectionPassword +
+    "@cluster0-tmejz.mongodb.net/test?retryWrites=true&w=majority";
+
+var client = new MongoClient(uri, { useUnifiedTopology: true }, { useNewUrlParser: true });
 
 // Loads the express module as a dependency
 var express = require('express');
 
 // Tells node that an express server is being created
 var app = express();
-
-// Loads the mongoose module
-// Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. 
-// Mongoose supports both promises and callbacks.
-var mongoose = require('mongoose');
 
 // Sets the port the express server will be running on
 var PORT = process.env.PORT = 3000;
@@ -92,19 +99,19 @@ passport.use(new SpotifyStrategy(
 )
 );
 
-// Connects to the spotify_users database in MongoDB
-mongoose.connect('mongodb+srv://The-Aux-Kimani:<password>@cluster0-tmejz.mongodb.net/test?retryWrites=true&w=majority',
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-    .catch(function (err) {
-        if (err) {
-            console.log(err);
-        };
+client.connect(err => {
+    var collection = client.db("The-Aux").collection("Spotify-Users");
+    // perform actions on the collection object
+
+    if (err) {
+        console.log(err);
+    };
+
+    client.close();
+
+    // Starts the express server
+    app.listen(PORT, function () {
+        console.log('Connected on port:' + PORT);
     });
 
-// Starts the express server
-app.listen(PORT, function () {
-    console.log('Connected on port:' + PORT);
 });
