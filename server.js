@@ -46,10 +46,8 @@ var PORT = process.env.PORT = 3000;
 
 var dataBase = require('./models');
 
-var userModel =
-
-    // Epxress middleware
-    app.use(express.urlencoded({ extended: true }));
+// Epxress middleware
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // Loads the api-routes to server.js
