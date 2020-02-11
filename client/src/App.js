@@ -5,6 +5,9 @@ import './App.css';
 // Imports the Login component
 import Login from './components/Login/login';
 
+// Imports the Home compoent
+import Home from './components/Home/home';
+
 class App extends Component {
   render() {
     return (

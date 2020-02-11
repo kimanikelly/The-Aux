@@ -22,22 +22,6 @@ module.exports = function (app) {
 
     });
 
-    app.post('/spotify/user', function (req, res) {
-        var user = new userModel(req.body);
-
-        user.save()
-            .then(function () {
-                res.json({
-                    "Message": "User Added"
-                })
-                console.log(user)
-            })
-            .catch(function (err) {
-                console.log(err);
-            });
-
-    });
-
     app.get(
         '/auth/spotify/callback',
         passport.authenticate('spotify', { failureRedirect: '/' }),
@@ -49,9 +33,21 @@ module.exports = function (app) {
         }
     );
 
+    app.post('/spotify/user', function (req, res) {
+        var user = new userModel(req.body);
 
-    app.get('/', function (req, res) {
-        
+        user.save(function (err) {
+
+            res.json({
+                'Message': 'User Added'
+            })
+
+            console.log(user)
+
+            if (err) {
+                console.log(err)
+            }
+        })
     })
 
 };

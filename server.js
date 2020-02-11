@@ -14,6 +14,8 @@ var bodyParser = require('body-parser');
 // Configures the dotenv module
 require('dotenv').config();
 
+var mongoose = require('mongoose');
+
 // Allows use of the passport Spotify OAuth Strategy
 var SpotifyStrategy = require('passport-spotify').Strategy;
 
@@ -29,18 +31,6 @@ var clientSecret = credentials.credentials.secret;
 
 // Stores the Spotify redirect uri
 var redirectUri = credentials.credentials.redirectUri;
-
-// Stores the MongoDB connection string password 
-var mongoConnectionPassword = credentials.credentials.mongoConnectionPassword;
-
-// Creates a new MongoClient instance
-var MongoClient = require('mongodb').MongoClient;
-
-// MongoDB Atlas connection URI containing the mongoConnectionPassword environment variable
-var uri = "mongodb+srv://The-Aux-Kimani:" + mongoConnectionPassword +
-    "@cluster0-tmejz.mongodb.net/test?retryWrites=true&w=majority";
-
-var client = new MongoClient(uri, { useUnifiedTopology: true }, { useNewUrlParser: true });
 
 // Loads the express module as a dependency
 var express = require('express');
@@ -78,40 +68,20 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-        // var User = 'Kimani'
-        // User.findOne(
-        //     {
-        //         spotifyId: profile.id
-        //     },
-        //     function (err, user) {
-
-        //         if (err) {
-        //             return done(err, user);
-        //         };
-        //     });
-        var id = "5e3eeced8b0fa24bf4dc71c8"
-        userModel.findById(id, function (err, user) {
-            if (err) {
-                return done(err, user)
-            }
-        })
+        User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
+            return done(err, { firstName: 'kimani' });
+        });
     }
 )
 );
 
-client.connect(err => {
-    var collection = client.db("The-Aux").collection("Spotify-Users");
-    // perform actions on the collection object
-
-    if (err) {
-        console.log(err);
-    };
-
-    client.close();
-
-    // Starts the express server
-    app.listen(PORT, function () {
-        console.log('Connected on port:' + PORT);
-    });
-
+mongoose.connect('mongodb://127.0.0.1/spotify_users', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 });
+
+// Starts the express server
+app.listen(PORT, function () {
+    console.log('Connected on port:' + PORT);
+});
+
