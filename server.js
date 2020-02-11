@@ -14,6 +14,8 @@ var bodyParser = require('body-parser');
 // Configures the dotenv module
 require('dotenv').config();
 
+// Loads the mongoose module as a dependency
+// Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js.
 var mongoose = require('mongoose');
 
 // Allows use of the passport Spotify OAuth Strategy
@@ -41,17 +43,26 @@ var app = express();
 // Sets the port the express server will be running on
 var PORT = process.env.PORT = 3000;
 
-var dataBase = require('./models');
+// Loads the UserSchema
+var userModel = require('./models/User');
 
-// Epxress middleware
+// Express middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(passport.initialize());
+
+passport.serializeUser(function (user, done) {
+    done(null, user);
+});
+
+passport.deserializeUser(function (user, done) {
+    done(null, user);
+});
 
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
-
-var userModel = require('./models/User')
 
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
@@ -68,8 +79,8 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-        User.findOrCreate({ spotifyId: profile.id }, function (err, user) {
-            return done(err, { firstName: 'kimani' });
+        userModel.find({ spotifyId: profile.id }, function (err, user) {
+            return done(err, user);
         });
     }
 )

@@ -26,10 +26,9 @@ module.exports = function (app) {
         '/auth/spotify/callback',
         passport.authenticate('spotify', { failureRedirect: '/' }),
         function (req, res) {
-            console.log(req)
 
             // Successful authentication, redirect home.
-            res.redirect('/');
+            res.redirect('http://localhost:3001');
         }
     );
 
