@@ -15,6 +15,8 @@ var bodyParser = require('body-parser');
 require('dotenv').config();
 
 // Loads the mongoose module as a dependency
+// Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. 
+// Mongoose supports both promises and callbacks.
 // Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js.
 var mongoose = require('mongoose');
 
@@ -50,6 +52,7 @@ var userModel = require('./models/User');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// Required to initialize passport
 app.use(passport.initialize());
 
 passport.serializeUser(function (user, done) {
@@ -80,12 +83,15 @@ passport.use(new SpotifyStrategy(
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
         userModel.find({ spotifyId: profile.id }, function (err, user) {
+            
             return done(err, user);
+
         });
     }
 )
 );
 
+// Connects the database to MongoDB
 mongoose.connect('mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true

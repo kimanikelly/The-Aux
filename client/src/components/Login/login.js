@@ -2,6 +2,10 @@
 // JSX is the React extension for HTML
 import React from 'react';
 
+// The react-helmet is an react component to add meta information into react components
+// Will be used to set the page title
+import { Helmet } from 'react-helmet';
+
 // Allows for HTTP requests on the client side to retrieve/communicate
 // With server side data(api-routes and database) and return responses
 // Promised based HTTP client
@@ -9,6 +13,9 @@ import axios from 'axios';
 
 // Loads the CSS stylesheet into login.js
 import './style.css';
+
+// Stores the value fo the page title 
+var pageTitle = 'The-Aux | Log-In'
 
 // ES6 class to define the Login component
 class Login extends React.Component {
@@ -39,16 +46,21 @@ class Login extends React.Component {
 
     render() {
         return (
-            <div className="container" id='login-container'>
+            <React.Fragment>
 
-                <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'
-                    // When this button is clicked the handleClick function is performed
-                    // Redirecting to the Spotify authorization page is done by clicking the button
-                    onClick={this.handleClick}>
-                    Large button
-                </button>
+                <Helmet>
+                    <title>{pageTitle}</title>
+                </Helmet>
 
-            </div>
+                <div className="container" id='login-container'>
+                    <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'
+                        // When this button is clicked the handleClick function is performed
+                        // Redirecting to the Spotify authorization page is done by clicking the button
+                        onClick={this.handleClick}>
+                        Large button
+                    </button>
+                </div>
+            </React.Fragment>
         )
     };
 };

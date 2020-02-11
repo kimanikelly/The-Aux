@@ -22,6 +22,7 @@ module.exports = function (app) {
 
     });
 
+    // Redirects the user back to the app on successful authorization
     app.get(
         '/auth/spotify/callback',
         passport.authenticate('spotify', { failureRedirect: '/' }),
@@ -31,22 +32,5 @@ module.exports = function (app) {
             res.redirect('http://localhost:3001');
         }
     );
-
-    app.post('/spotify/user', function (req, res) {
-        var user = new userModel(req.body);
-
-        user.save(function (err) {
-
-            res.json({
-                'Message': 'User Added'
-            })
-
-            console.log(user)
-
-            if (err) {
-                console.log(err)
-            }
-        })
-    })
 
 };

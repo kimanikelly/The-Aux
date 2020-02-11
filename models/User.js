@@ -1,6 +1,7 @@
 // Loads the mongoose module
 // Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. 
 // Mongoose supports both promises and callbacks.
+// Mongoose is an Object Data Modeling (ODM) library for MongoDB and Node.js.
 var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
@@ -8,7 +9,7 @@ var Schema = mongoose.Schema;
 // Defines the userSchema
 var UserSchema = new Schema({
 
-    userName: {
+    user: {
         type: String,
         required: true
     }
