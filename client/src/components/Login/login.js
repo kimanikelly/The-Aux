@@ -35,7 +35,7 @@ class Login extends React.Component {
             // Callback returns the response object(Spotify authorization data)
             .then(function (res) {
 
-                // Redirects the browser to the Spotify authirization page
+                // Redirects the browser to the Spotify authorization page
                 window.location = 'http://localhost:3000/auth/spotify'
             })
             // If there’s a problem with the request, the promise will be rejected with an error object

@@ -28,8 +28,9 @@ module.exports = function (app) {
         passport.authenticate('spotify', { failureRedirect: '/' }),
         function (req, res) {
 
+
             // Successful authentication, redirect home.
-            res.redirect('http://localhost:3001');
+            res.redirect('http://www.google.com');
         }
     );
 

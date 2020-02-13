@@ -46,7 +46,7 @@ var app = express();
 var PORT = process.env.PORT = 3000;
 
 // Loads the UserSchema
-var userModel = require('./models/User');
+var SpotifyUser = require('./models/User');
 
 // Express middleware
 app.use(express.urlencoded({ extended: true }));
@@ -82,11 +82,17 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-        userModel.find({ spotifyId: profile.id }, function (err, user) {
-            
-            return done(err, user);
 
-        });
+        SpotifyUser.findOne(
+            {
+                spotifyId: profile.id,
+
+            },
+            function (err, user) {
+
+                return done(err, user);
+
+            });
     }
 )
 );
