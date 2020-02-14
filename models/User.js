@@ -9,12 +9,12 @@ var Schema = mongoose.Schema;
 // Defines the userSchema
 var UserSchema = new Schema({
 
-    spotifyUser: {
+    spotifyUserId: {
         type: String,
         required: true
     },
 
-    spotifyEmail: {
+    spotifyUserName: {
         type: String,
         required: true
     }
