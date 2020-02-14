@@ -52,14 +52,22 @@ class Login extends React.Component {
                     <title>{pageTitle}</title>
                 </Helmet>
 
+                <nav class="navbar navbar-light bg-light">
+                    <a class="navbar-brand" href="#">Navbar</a>
+                </nav>
+
                 <div className="container" id='login-container'>
-                    <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'
+                    <button type="button" className="btn btn-secondary btn-block btn-lg" id='log-in-button'
                         // When this button is clicked the handleClick function is performed
                         // Redirecting to the Spotify authorization page is done by clicking the button
                         onClick={this.handleClick}>
-                        Large button
+                        Login
                     </button>
                 </div>
+
+                <nav class="navbar fixed-bottom navbar-light bg-light">
+                    <a class="navbar-brand" href="#">Fixed bottom</a>
+                </nav>
             </React.Fragment>
         )
     };

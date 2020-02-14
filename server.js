@@ -88,24 +88,27 @@ passport.use(new SpotifyStrategy(
                 spotifyId: profile.id,
 
             },
+
+            // This function is executed after successful user authorization
+            // The user parameter is stores the 
             function (err, user) {
                 if (err) {
                     console.log(err);
                 };
 
                 var newSpotifyUser = new SpotifyUserModel({
-                    spotifyUserId: profile.id,
-                    spotifyUserName: profile.username
+                    spotifyProfileId: profile.id,
+                    spotifyUserName: profile.username,
+                    userId: user._id
+
                 });
 
                 newSpotifyUser.save(function (err) {
                     if (err) {
-                        console.log(err)
+                        console.log(err);
                     }
 
                 });
-
-                console.log(newSpotifyUser);
 
                 return done(err, user);
 

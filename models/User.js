@@ -9,7 +9,7 @@ var Schema = mongoose.Schema;
 // Defines the userSchema
 var UserSchema = new Schema({
 
-    spotifyUserId: {
+    spotifyProfileId: {
         type: String,
         required: true
     },
@@ -17,6 +17,11 @@ var UserSchema = new Schema({
     spotifyUserName: {
         type: String,
         required: true
+    },
+
+    userId: {
+        type:String,
+        required:true
     }
 
 });
