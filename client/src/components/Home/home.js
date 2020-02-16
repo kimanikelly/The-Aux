@@ -7,11 +7,7 @@ import React from 'react';
 // Promised based HTTP client
 import axios from 'axios';
 
-
 class Home extends React.Component {
-    constructor(props) {
-        super(props)
-    }
 
     render() {
         return (

@@ -15,7 +15,7 @@ import axios from 'axios';
 import './style.css';
 
 // Stores the value fo the page title 
-var pageTitle = 'The-Aux | Log-In'
+var pageTitle = 'The-Aux | Login'
 
 // ES6 class to define the Login component
 class Login extends React.Component {
@@ -53,21 +53,16 @@ class Login extends React.Component {
                 </Helmet>
 
                 <nav class="navbar navbar-light bg-light">
-                    <a class="navbar-brand" href="#">Navbar</a>
+                    <h1 className='the-aux'>The-Aux</h1>
                 </nav>
 
-                <div className="container" id='login-container'>
-                    <button type="button" className="btn btn-secondary btn-block btn-lg" id='log-in-button'
-                        // When this button is clicked the handleClick function is performed
-                        // Redirecting to the Spotify authorization page is done by clicking the button
-                        onClick={this.handleClick}>
-                        Login
-                    </button>
-                </div>
+                <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'
+                    // When this button is clicked the handleClick function is performed
+                    // Redirecting to the Spotify authorization page is done by clicking the button
+                    onClick={this.handleClick}>
+                    Login
+                </button>
 
-                <nav class="navbar fixed-bottom navbar-light bg-light">
-                    <a class="navbar-brand" href="#">Fixed bottom</a>
-                </nav>
             </React.Fragment>
         )
     };

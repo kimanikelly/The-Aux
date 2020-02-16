@@ -1,18 +1,24 @@
-body {
-    /* background-color: #000000; */
-    background-image: url('../../images/spotifyBackgroundImage.png');
-    background-attachment: fixed;
-    background-size: cover;
+.navbar {
+    background-color:rgb(70, 81, 95) !important;
+    border-bottom:5px solid orangered;
 }
 
-#login-container {
-    margin-top:8%;
-    width:500px;
-    height:500px;
-    background-color:lightgrey;
-
+.the-aux {
+    color:whitesmoke;
+    text-transform: uppercase;
+    font-weight: bold;
+    margin-left:43%;
 }
 
 #log-in-button {
-    margin-top:20px;
+    color:whitesmoke;
+    display: block;
+    margin:0 auto;
+    text-transform:uppercase;
+    font-size:30px;
+    font-weight:bold;
+    margin-top:12%;
+    border:2px solid orangered;
+    border-radius:32px;
+  
 }
