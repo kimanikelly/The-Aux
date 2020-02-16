@@ -22,6 +22,12 @@ class App extends Component {
             <Login />
           </div>
         )} />
+
+        <Route exact={true} path='/home' render={() => (
+          <div className='App'>
+            <Home />
+          </div>
+        )} />
       </BrowserRouter>
     );
   };
