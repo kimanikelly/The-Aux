@@ -7,13 +7,26 @@ import React from 'react';
 // Promised based HTTP client
 import axios from 'axios';
 
+// /The react-helmet is an react component to add meta information into react components
+// Will be used to set the page title
+import { Helmet } from 'react-helmet';
+
+// Stores the value fo the page title 
+var pageTitle = 'The-Aux | Home';
+
 class Home extends React.Component {
 
     render() {
         return (
-            <div>
-                <h1>Testing</h1>
-            </div>
+            <React.Fragment>
+                <Helmet>
+                    <title>{pageTitle}</title>
+                </Helmet>
+
+                <div>
+                    <h1>Testing</h1>
+                </div>
+            </React.Fragment>
         )
     }
 };
