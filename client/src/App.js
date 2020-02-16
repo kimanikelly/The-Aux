@@ -16,11 +16,15 @@ import { BrowserRouter, Route } from 'react-router-dom';
 class App extends Component {
   render() {
     return (
-      <div>
-        <Login />
-        {/* <Home/> */}
-      </div>
-    )
-  }
-}
+      <BrowserRouter>
+        <Route exact={true} path='/' render={() => (
+          <div className='App'>
+            <Login />
+          </div>
+        )} />
+      </BrowserRouter>
+    );
+  };
+};
+
 export default App;

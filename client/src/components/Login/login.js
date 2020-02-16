@@ -52,7 +52,7 @@ class Login extends React.Component {
                     <title>{pageTitle}</title>
                 </Helmet>
 
-                <nav class="navbar navbar-light bg-light">
+                <nav className="navbar navbar-light bg-light">
                     <h1 className='the-aux'>The-Aux</h1>
                 </nav>
 
