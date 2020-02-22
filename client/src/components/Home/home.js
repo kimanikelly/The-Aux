@@ -11,19 +11,31 @@ import axios from 'axios';
 // Will be used to set the page title
 import { Helmet } from 'react-helmet';
 
-// 
-import ScriptTag from 'react-script-tag';
-
-import './style.css'
+// Loads and applies the custom css stylesheet
+import './style.css';
 
 // Stores the value fo the page title 
 var pageTitle = 'The-Aux | Home';
 
+// Loads the react-script-tag module
+// Allows for embedding script tags
+import ScriptTag from 'react-script-tag';
+
+// Initializes the Spotify Web Player SDK
+window.onSpotifyWebPlaybackSDKReady = function () {
+    // You can now initialize Spotify.Player and use the SDK
+};
+
+// ES6 class to define the Home component
 class Home extends React.Component {
 
     render() {
         return (
             <React.Fragment>
+                {/* Installs the Spotify Web Playback SDK */}
+                <ScriptTag isHydrating={true} type="text/javascript" src="https://sdk.scdn.co/spotify-player.js" />
+
+                {/* Sets the page title using the react Helmet component */}
                 <Helmet>
                     <title>{pageTitle}</title>
                 </Helmet>
@@ -36,4 +48,5 @@ class Home extends React.Component {
     }
 };
 
+// Exports the Home component
 export default Home;
