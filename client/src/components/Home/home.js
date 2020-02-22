@@ -7,9 +7,12 @@ import React from 'react';
 // Promised based HTTP client
 import axios from 'axios';
 
-// /The react-helmet is an react component to add meta information into react components
+// The react-helmet is a react component to add meta information into react components
 // Will be used to set the page title
 import { Helmet } from 'react-helmet';
+
+// 
+import ScriptTag from 'react-script-tag';
 
 import './style.css'
 
