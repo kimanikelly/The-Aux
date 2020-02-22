@@ -17,14 +17,16 @@ import './style.css';
 // Stores the value fo the page title 
 var pageTitle = 'The-Aux | Home';
 
-// Loads the react-script-tag module
-// Allows for embedding script tags
-import ScriptTag from 'react-script-tag';
+var player = new window.Spotify.Player({
+    name: 'Carly Rae Jepsen Player',
+    getOAuthToken: callback => {
+      // Run code to get a fresh access token
+  
+      callback('access token here');
+    },
+    volume: 0.5
+  });
 
-// Initializes the Spotify Web Player SDK
-window.onSpotifyWebPlaybackSDKReady = function () {
-    // You can now initialize Spotify.Player and use the SDK
-};
 
 // ES6 class to define the Home component
 class Home extends React.Component {
@@ -32,8 +34,6 @@ class Home extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {/* Installs the Spotify Web Playback SDK */}
-                <ScriptTag isHydrating={true} type="text/javascript" src="https://sdk.scdn.co/spotify-player.js" />
 
                 {/* Sets the page title using the react Helmet component */}
                 <Helmet>
@@ -43,6 +43,7 @@ class Home extends React.Component {
                 <nav className="navbar navbar-light bg-light">
                     <h1 className='the-aux'>The-Aux</h1>
                 </nav>
+
             </React.Fragment>
         )
     }
