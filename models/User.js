@@ -22,7 +22,7 @@ var UserSchema = new Schema({
     userId: {
         type: String,
         required: true
-    }
+    },
 
 });
 

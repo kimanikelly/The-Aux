@@ -11,6 +11,8 @@ import axios from 'axios';
 // Will be used to set the page title
 import { Helmet } from 'react-helmet';
 
+import './style.css'
+
 // Stores the value fo the page title 
 var pageTitle = 'The-Aux | Home';
 
@@ -23,9 +25,9 @@ class Home extends React.Component {
                     <title>{pageTitle}</title>
                 </Helmet>
 
-                <div>
-                    <h1>Testing</h1>
-                </div>
+                <nav className="navbar navbar-light bg-light">
+                    <h1 className='the-aux'>The-Aux</h1>
+                </nav>
             </React.Fragment>
         )
     }

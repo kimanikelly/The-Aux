@@ -1,7 +1,13 @@
 // Requiring the passport module as a dependency
 var passport = require('passport');
 
+var SpotifyUserModel = require('../models/User');
+
 module.exports = function (app) {
+
+    app.get("https://api.spotify.com/v1/users/kimanikelly", function (req, res) {
+        console.log(res)
+    })
 
     // Initiates Oauth transaction and redirects the user to Spotify
     app.get('/auth/spotify', passport.authenticate('spotify', {
@@ -25,7 +31,6 @@ module.exports = function (app) {
         '/auth/spotify/callback',
         passport.authenticate('spotify', { failureRedirect: '/' }),
         function (req, res) {
-
             // Successful authentication, redirect home.
             res.redirect('http://localhost:3001/home');
         }
