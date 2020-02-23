@@ -1,3 +1,7 @@
+body {
+    background-image: url('../../images/gray_sand.png');
+}
+
 .navbar {
     background-color:rgb(70, 81, 95) !important;
     border-bottom:5px solid orangered;

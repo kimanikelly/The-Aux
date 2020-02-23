@@ -22,7 +22,8 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "Access-Control-Allow-Origin": "*"
   },
   "browserslist": {
     "production": [
