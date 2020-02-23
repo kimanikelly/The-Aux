@@ -24,6 +24,10 @@ var UserSchema = new Schema({
         required: true
     },
 
+    token: {
+        type: String,
+        required: true
+    }
 });
 
 // Converts the userSchema into a model

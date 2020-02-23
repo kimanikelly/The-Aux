@@ -87,7 +87,6 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-        console.log(accessToken)
         SpotifyUserModel.findOne(
             {
                 spotifyId: profile.id,
@@ -105,6 +104,7 @@ passport.use(new SpotifyStrategy(
                     spotifyProfileId: profile.id,
                     spotifyUserName: profile.username,
                     userId: user._id,
+                    token: accessToken
                 });
 
                 newSpotifyUser.save(function (err) {
@@ -115,7 +115,7 @@ passport.use(new SpotifyStrategy(
                 });
 
                 return done(err, user);
-        
+
             });
     }
 )

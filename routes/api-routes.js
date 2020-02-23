@@ -5,10 +5,6 @@ var SpotifyUserModel = require('../models/User');
 
 module.exports = function (app) {
 
-    app.get("https://api.spotify.com/v1/users/kimanikelly", function (req, res) {
-        console.log(res)
-    })
-
     // Initiates Oauth transaction and redirects the user to Spotify
     app.get('/auth/spotify', passport.authenticate('spotify', {
 
@@ -35,5 +31,29 @@ module.exports = function (app) {
             res.redirect('http://localhost:3001/home');
         }
     );
+
+    app.get('/users', function (req, res) {
+
+        // 
+        SpotifyUserModel.find(function (err, spotifyUsers) {
+            if (err) {
+                console.log(err)
+            };
+
+            // SpotifyUsers returns an array of objects storing all users and their credentials
+            // The recentUser variable stores the recent user logged in of the SpotifyUsers array
+            var recentUser = spotifyUsers.slice(-1);
+
+            // The recentUserToken variable stores the recent users access token
+            var recentUserToken = recentUser[0]['token'];
+
+            res.status(200).json({
+                Token:recentUserToken
+            })
+
+
+
+        });
+    });
 
 };
