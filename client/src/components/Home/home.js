@@ -17,19 +17,28 @@ import './style.css';
 // Stores the value fo the page title 
 var pageTitle = 'The-Aux | Home';
 
-axios({
-    method: 'get',
-    baseURL: 'https://api.spotify.com/v1/me',
-    headers: {
-        Authorization: 'Bearer BQBwNM_Zf_p0a4STiacbg18HJXuKU9OTMyn1UBU4w7yBFZqw_U2xUktbVIwk8adytEQ3jdEaQEJ496AvDaVUwgicxwKIYPMXwe1TKR4eUviCkmYmekR2U2CO5F6WQCyQKmfu7S20P1ZMtKy7CqgEcZtwszitUQDTtl0'
-    }
-})
+// axios({
+//     method: 'get',
+//     baseURL: 'https://api.spotify.com/v1/me',
+//     headers: {
+//         Authorization: 'Bearer BQBwNM_Zf_p0a4STiacbg18HJXuKU9OTMyn1UBU4w7yBFZqw_U2xUktbVIwk8adytEQ3jdEaQEJ496AvDaVUwgicxwKIYPMXwe1TKR4eUviCkmYmekR2U2CO5F6WQCyQKmfu7S20P1ZMtKy7CqgEcZtwszitUQDTtl0'
+//     }
+// })
+//     .then(function (res) {
+//         console.log(res.data)
+//     })
+//     .catch(function (err) {
+//         console.log(err)
+//     })
+
+axios.get('http://localhost:3000/users')
     .then(function (res) {
-        console.log(res.data)
+        console.log(res.data.Token);
     })
     .catch(function (err) {
         console.log(err)
     })
+
 // ES6 class to define the Home component
 class Home extends React.Component {
 
