@@ -17,30 +17,45 @@ import './style.css';
 // Stores the value fo the page title 
 var pageTitle = 'The-Aux | Home';
 
-// axios({
-//     method: 'get',
-//     baseURL: 'https://api.spotify.com/v1/me',
-//     headers: {
-//         Authorization: 'Bearer BQBwNM_Zf_p0a4STiacbg18HJXuKU9OTMyn1UBU4w7yBFZqw_U2xUktbVIwk8adytEQ3jdEaQEJ496AvDaVUwgicxwKIYPMXwe1TKR4eUviCkmYmekR2U2CO5F6WQCyQKmfu7S20P1ZMtKy7CqgEcZtwszitUQDTtl0'
-//     }
-// })
-//     .then(function (res) {
-//         console.log(res.data)
-//     })
-//     .catch(function (err) {
-//         console.log(err)
-//     })
-
-axios.get('http://localhost:3000/users')
-    .then(function (res) {
-        console.log(res.data.Token);
-    })
-    .catch(function (err) {
-        console.log(err)
-    })
-
 // ES6 class to define the Home component
 class Home extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            displayName: '',
+            token: ''
+
+        }
+
+    };
+
+    // componentDidMount() {
+
+    //     axios.get('http://localhost:3000/users')
+    //         .then(function (res) {
+    //             console.log(res.data.Token)
+
+    //         })
+    //         .catch(function (err) {
+    //             console.log(err)
+    //         })
+    // }
+
+    componentDidMount() {
+
+        axios.get('http://localhost:3000/users')
+            .then((res) => {
+                this.setState({
+                    token: res.data.Token,
+                    displayName: res.data.DisplayName
+                })
+                console.log(res.data.DisplayName)
+            })
+            .catch(function (err) {
+                console.log(err)
+            })
+    }
 
     render() {
         return (
@@ -55,6 +70,9 @@ class Home extends React.Component {
                     <h1 className='the-aux'>The-Aux</h1>
                 </nav>
 
+                <div id='display-header'>
+                    <h1>Welcome: {this.state.displayName}</h1>
+                </div>
             </React.Fragment>
         )
     }

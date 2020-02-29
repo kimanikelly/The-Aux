@@ -18,12 +18,7 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
-
-    userId: {
-        type: String,
-        required: true
-    },
-
+    
     token: {
         type: String,
         required: true

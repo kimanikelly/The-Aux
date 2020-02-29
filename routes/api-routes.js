@@ -34,7 +34,6 @@ module.exports = function (app) {
 
     app.get('/users', function (req, res) {
 
-        // 
         SpotifyUserModel.find(function (err, spotifyUsers) {
             if (err) {
                 console.log(err)
@@ -47,11 +46,15 @@ module.exports = function (app) {
             // The recentUserToken variable stores the recent users access token
             var recentUserToken = recentUser[0]['token'];
 
-            res.status(200).json({
-                Token:recentUserToken
-            })
+            // The recentUserDisplayName variable stores the recent users display name
+            var recentUserDisplayName = recentUser[0]['spotifyProfileId'];
 
+            console.log(recentUser)
 
+            res.json({
+                Token: recentUserToken,
+                DisplayName: recentUserDisplayName
+            });
 
         });
     });

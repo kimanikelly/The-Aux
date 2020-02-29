@@ -103,7 +103,6 @@ passport.use(new SpotifyStrategy(
                 var newSpotifyUser = new SpotifyUserModel({
                     spotifyProfileId: profile.id,
                     spotifyUserName: profile.username,
-                    userId: user._id,
                     token: accessToken
                 });
 
