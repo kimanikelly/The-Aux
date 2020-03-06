@@ -53,7 +53,7 @@ module.exports = function (app) {
             var recentUserEmail = recentUser[0]['email'];
 
             // The response returns a JSON object storing the following credentials
-            res.json({
+            res.send({
                 Token: recentUserToken,
                 DisplayName: recentUserDisplayName,
                 Email: recentUserEmail
