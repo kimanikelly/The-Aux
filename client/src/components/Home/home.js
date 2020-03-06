@@ -17,6 +17,9 @@ import './style.css';
 // Stores the value fo the page title 
 var pageTitle = 'The-Aux | Home';
 
+// Loads the spotify-web-api-js module to allow access to the Spotify Web API
+var Spotify = require('spotify-web-api-js');
+
 
 // ES6 class to define the Home component
 class Home extends React.Component {
