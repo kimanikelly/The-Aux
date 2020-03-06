@@ -49,11 +49,14 @@ module.exports = function (app) {
             // The recentUserDisplayName variable stores the recent users display name
             var recentUserDisplayName = recentUser[0]['spotifyProfileId'];
 
-            console.log(recentUser)
+            // The recentUserEmail variabke stores the recent users email
+            var recentUserEmail = recentUser[0]['email'];
 
+            // The response returns a JSON object storing the following credentials
             res.json({
                 Token: recentUserToken,
-                DisplayName: recentUserDisplayName
+                DisplayName: recentUserDisplayName,
+                Email: recentUserEmail
             });
 
         });

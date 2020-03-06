@@ -17,6 +17,7 @@ import './style.css';
 // Stores the value fo the page title 
 var pageTitle = 'The-Aux | Home';
 
+
 // ES6 class to define the Home component
 class Home extends React.Component {
     constructor(props) {
@@ -24,31 +25,19 @@ class Home extends React.Component {
 
         this.state = {
             displayName: '',
-            token: ''
+            email: ''
 
         }
 
     };
-
-    // componentDidMount() {
-
-    //     axios.get('http://localhost:3000/users')
-    //         .then(function (res) {
-    //             console.log(res.data.Token)
-
-    //         })
-    //         .catch(function (err) {
-    //             console.log(err)
-    //         })
-    // }
 
     componentDidMount() {
 
         axios.get('http://localhost:3000/users')
             .then((res) => {
                 this.setState({
-                    token: res.data.Token,
-                    displayName: res.data.DisplayName
+                    displayName: res.data.DisplayName,
+                    email: res.data.Email
                 })
                 console.log(res.data.DisplayName)
             })
@@ -71,8 +60,11 @@ class Home extends React.Component {
                 </nav>
 
                 <div id='display-header'>
-                    <h1>Welcome: {this.state.displayName}</h1>
+                    <h1>Spotify Display Name: {this.state.displayName}</h1>
+                    <h1>Email: {this.state.email}</h1>
                 </div>
+
+
             </React.Fragment>
         )
     }

@@ -8,6 +8,10 @@ h1 {
    
 }
 
+#profile {
+    text-decoration:underline;
+}
+
 #display-header {
     background-color:lightgray;
     
