@@ -24,6 +24,23 @@ var Spotify = require('spotify-web-api-js');
 var spotifyApi = new Spotify();
 
 
+axios.get('http://localhost:3000/users')
+    .then(function (res) {
+        console.log(res.data)
+    })
+    .catch(function (err) {
+        console.log(err);
+    });
+
+
+spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
+    .then(function (data) {
+        console.log9(data)
+    })
+    .catch(function (err) {
+        console.log(err)
+    })
+
 // ES6 class to define the Home component
 class Home extends React.Component {
     constructor(props) {
@@ -45,11 +62,10 @@ class Home extends React.Component {
                     displayName: res.data.DisplayName,
                     email: res.data.Email
                 })
-                console.log(res.data.DisplayName)
             })
             .catch(function (err) {
                 console.log(err)
-            })
+            });
     }
 
     render() {
