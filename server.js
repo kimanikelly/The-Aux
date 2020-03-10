@@ -117,6 +117,12 @@ passport.use(new SpotifyStrategy(
                 return done(err, user);
 
             });
+
+        app.get('/token', function (req, res) {
+            res.send({
+                token: accessToken
+            });
+        });
     }
 )
 );

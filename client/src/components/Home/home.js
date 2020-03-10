@@ -23,24 +23,6 @@ var Spotify = require('spotify-web-api-js');
 // Initializes the Spotify Web API
 var spotifyApi = new Spotify();
 
-
-axios.get('http://localhost:3000/users')
-    .then(function (res) {
-        console.log(res.data)
-    })
-    .catch(function (err) {
-        console.log(err);
-    });
-
-
-spotifyApi.getArtistAlbums('43ZHCT0cAZBISjO8DG9PnE')
-    .then(function (data) {
-        console.log9(data)
-    })
-    .catch(function (err) {
-        console.log(err)
-    })
-
 // ES6 class to define the Home component
 class Home extends React.Component {
     constructor(props) {
@@ -48,9 +30,10 @@ class Home extends React.Component {
 
         this.state = {
             displayName: '',
-            email: ''
+            email: '',
+        };
 
-        }
+        this.search = this.search.bind(this)
 
     };
 
@@ -66,7 +49,26 @@ class Home extends React.Component {
             .catch(function (err) {
                 console.log(err)
             });
-    }
+    };
+
+    search() {
+        axios.get('http://localhost:3000/token')
+            .then(function (res) {
+                console.log(res.data.token)
+                spotifyApi.setAccessToken(res.data.token);
+
+                // search tracks whose artist's name contains 'Love'
+                spotifyApi.searchTracks('tupac:temptations')
+                    .then(function (data) {
+                        console.log('Search tracks by "Love" in the artist name', data);
+                    }, function (err) {
+                        console.error(err);
+                    });
+            })
+            .catch(function (err) {
+                console.log(err);
+            })
+    };
 
     render() {
         return (
@@ -85,6 +87,8 @@ class Home extends React.Component {
                     <h1>Spotify Display Name: {this.state.displayName}</h1>
                     <h1>Email: {this.state.email}</h1>
                 </div>
+
+                <button onClick={this.search}>Search</button>
 
 
             </React.Fragment>
