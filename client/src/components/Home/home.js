@@ -35,7 +35,6 @@ class Home extends React.Component {
             track: ''
         };
 
-        this.search = this.search.bind(this);
         this.artistHandleChange = this.artistHandleChange.bind(this);
         this.trackHandleChange = this.trackHandleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -62,7 +61,7 @@ class Home extends React.Component {
             })
             // If an error occurs during the GET request to the 'users' API it will be caught and logged to the console
             .catch(function (err) {
-                console.log(err)
+                console.log(err);
             });
     };
 
@@ -74,39 +73,50 @@ class Home extends React.Component {
 
     trackHandleChange(event) {
         this.setState({
-            track: event.targer.value
+            track: event.target.value
         });
     };
 
     handleSubmit(event) {
         event.preventDefault();
 
-        var testing = {
-            artist: this.state.artist,
-            track: this.state.track
-        };
-    };
+        // The artist variable stores the value of the artist state
+        // The value of artist state will change depending on the artist input
+        var artist = this.state.artist;
 
-    search() {
-         // Axios GET request 'token' API path
+        // The track variable stores the value of the track state
+        // The value of track state will change depending on the track input
+        var track = this.state.track;
+
+        // Axios GET request 'token' API path
         axios.get('http://localhost:3000/token')
             .then(function (res) {
-                console.log(res.data.token)
 
                 // Sets the Spotify access token
                 spotifyApi.setAccessToken(res.data.token);
 
-                // Search artists and their tracks
-                spotifyApi.searchTracks('tupac:temptations')
+                // The spotifyApi searchTracks function used to search artists and their tracks
+                // The artist variable used as an input 
+                // The track variable used as an input
+                spotifyApi.searchTracks(artist + ':' + track)
+
                     .then(function (data) {
                         console.log(data);
+
                     }, function (err) {
                         console.error(err);
                     });
             })
+            // If an error occurs during the GET request to the 'token' API it will be caught and logged to the console
             .catch(function (err) {
                 console.log(err);
-            })
+            });
+
+        // Upon form submission the artist and track input fields will clear
+        this.setState({
+            artist: '',
+            track: ''
+        });
     };
 
     render() {
@@ -130,13 +140,18 @@ class Home extends React.Component {
                 <form onSubmit={this.handleSubmit}>
                     <label>
                         Artist:
-                        <input type='text' value={this.state.artist} onChange={this.artistHandleChange} />
+                        <input type='text'
+                            value={this.state.artist}
+                            onChange={this.artistHandleChange} />
                     </label>
 
                     <label>
                         Track:
-                        <input type='text' value={this.state.track} onChange={this.trackHandleChange} />
+                        <input type='text'
+                            value={this.state.track}
+                            onChange={this.trackHandleChange} />
                     </label>
+                    <input type='submit' value='submit'></input>
                 </form>
 
             </React.Fragment>
