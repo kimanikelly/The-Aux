@@ -14,7 +14,9 @@
     "react-script-tag": "^1.1.2",
     "react-scripts": "3.3.0",
     "react-spotify-player": "^1.0.4",
-    "spotify-web-api-js": "^1.2.0"
+    "react-spotify-web-playback": "^0.6.0",
+    "spotify-web-api-js": "^1.2.0",
+    "use-spotify-web-playback-sdk": "^0.2.2"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -17,7 +17,7 @@ import './style.css';
 // Stores the value fo the page title 
 var pageTitle = 'The-Aux | Home';
 
-// Loads the spotify-web-api-js module to allow access to the Spotify Web API
+// Loads the spotify-web-api-js NPM module to allow access to the Spotify Web API
 var Spotify = require('spotify-web-api-js');
 
 // Initializes the Spotify Web API
@@ -88,6 +88,17 @@ class Home extends React.Component {
         // The value of track state will change depending on the track input
         var track = this.state.track;
 
+        // The artistName variable will store artist searched for
+        // The artistTrack variable will store the track searched for
+        // The artistAlbum variable will store the album the searched track is located on
+        // The releaseDate variable will store the albums/tracks release date
+        // The albumImage variable will store the albums/tracks cover art
+        var artistName;
+        var artistTrack;
+        var artistAlbum;
+        var releaseDate;
+        var albumImage;
+
         // Axios GET request 'token' API path
         axios.get('http://localhost:3000/token')
             .then(function (res) {
@@ -101,7 +112,25 @@ class Home extends React.Component {
                 spotifyApi.searchTracks(artist + ':' + track)
 
                     .then(function (data) {
-                        console.log(data);
+
+                        // Assigns the artistName the artists name requested from the search response
+                        // Assigns the artistTrack the track name requested from the search response
+                        // Assigns the artistAlbum the album name requested from the search response
+                        // Assigns the releaseDate the album/track release date
+                        // Assigns the albumImage the album/track cover art
+                        artistName = data.tracks.items[0].album.artists[0].name
+                        artistTrack = data.tracks.items[0].name
+                        artistAlbum = data.tracks.items[0].album.name
+                        releaseDate = data.tracks.items[0].album.release_date
+                        albumImage = data.tracks.items[0].album.images[0].url
+
+                        console.log({
+                            artistName: artistName,
+                            artistTrack: artistTrack,
+                            artistAlbum: artistAlbum,
+                            releaseDate: releaseDate,
+                            albumImage: albumImage
+                        })
 
                     }, function (err) {
                         console.error(err);
@@ -113,6 +142,7 @@ class Home extends React.Component {
             });
 
         // Upon form submission the artist and track input fields will clear
+        // Sets the artist and track states to empty strings
         this.setState({
             artist: '',
             track: ''
@@ -141,6 +171,7 @@ class Home extends React.Component {
                     <label>
                         Artist:
                         <input type='text'
+                            placeholder='Search Artist'
                             value={this.state.artist}
                             onChange={this.artistHandleChange} />
                     </label>
@@ -148,12 +179,12 @@ class Home extends React.Component {
                     <label>
                         Track:
                         <input type='text'
+                            placeholder='Search Track'
                             value={this.state.track}
                             onChange={this.trackHandleChange} />
                     </label>
                     <input type='submit' value='submit'></input>
                 </form>
-
             </React.Fragment>
         )
     }
