@@ -2,6 +2,8 @@
 // JSX is the React extension for HTML
 import React from 'react';
 
+import SpotifyPlayer from 'react-spotify-web-playback';
+
 // Allows for HTTP requests on the client side to retrieve/communicate
 // With server side data(api-routes and database) and return responses
 // Promised based HTTP client
@@ -32,7 +34,7 @@ class Home extends React.Component {
             displayName: '',
             email: '',
             artist: '',
-            track: ''
+            track: '',
         };
 
         this.artistHandleChange = this.artistHandleChange.bind(this);
@@ -106,6 +108,9 @@ class Home extends React.Component {
                 // Sets the Spotify access token
                 spotifyApi.setAccessToken(res.data.token);
 
+                // Stores the token in localStorage
+                localStorage.setItem('key', res.data.token);
+
                 // The spotifyApi searchTracks function used to search artists and their tracks
                 // The artist variable used as an input 
                 // The track variable used as an input
@@ -118,11 +123,11 @@ class Home extends React.Component {
                         // Assigns the artistAlbum the album name requested from the search response
                         // Assigns the releaseDate the album/track release date
                         // Assigns the albumImage the album/track cover art
-                        artistName = data.tracks.items[0].album.artists[0].name
-                        artistTrack = data.tracks.items[0].name
-                        artistAlbum = data.tracks.items[0].album.name
-                        releaseDate = data.tracks.items[0].album.release_date
-                        albumImage = data.tracks.items[0].album.images[0].url
+                        artistName = data.tracks.items[0].album.artists[0].name;
+                        artistTrack = data.tracks.items[0].name;
+                        artistAlbum = data.tracks.items[0].album.name;
+                        releaseDate = data.tracks.items[0].album.release_date;
+                        albumImage = data.tracks.items[0].album.images[0].url;
 
                         console.log({
                             artistName: artistName,
@@ -130,11 +135,12 @@ class Home extends React.Component {
                             artistAlbum: artistAlbum,
                             releaseDate: releaseDate,
                             albumImage: albumImage
-                        })
+                        });
 
                     }, function (err) {
                         console.error(err);
                     });
+
             })
             // If an error occurs during the GET request to the 'token' API it will be caught and logged to the console
             .catch(function (err) {
@@ -185,6 +191,11 @@ class Home extends React.Component {
                     </label>
                     <input type='submit' value='submit'></input>
                 </form>
+
+                <SpotifyPlayer
+                    token={localStorage.getItem('key')}
+
+                />
             </React.Fragment>
         )
     }
