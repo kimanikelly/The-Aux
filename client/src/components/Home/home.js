@@ -77,11 +77,11 @@ class Home extends React.Component {
                 console.log(err);
             });
 
-        this.testing()
+        this.accessToken();
 
     };
 
-    testing() {
+    accessToken() {
         // Axios GET request 'token' API path
         axios.get('http://localhost:3000/token')
             .then(function (res) {
@@ -113,21 +113,27 @@ class Home extends React.Component {
                     <h1 className='the-aux'>The-Aux</h1>
                 </nav>
 
-                <div id='display-header'>
+                <div id='display-name'>
                     <h1>Spotify Display Name: {this.state.displayName}</h1>
-                    <h1>Email: {this.state.email}</h1>
                 </div>
 
-                <SpotifyPlayer
-                    play='true'
-                    magnifySliderOnHover='true'
-                    autoPlay='true'
-                    token={sessionStorage.getItem('key')}
+                <div id='email'>
+                    <h1>Spotify Email: {this.state.email}</h1>
+                </div>
 
-                />
+                <div id='player'>
+                    <SpotifyPlayer
+                        persistDeviceSelection='true'
+                        play='true'
+                        magnifySliderOnHover='true'
+                        autoPlay='true'
+                        token={sessionStorage.getItem('key')}
+
+                    />
+                </div>
 
                 <nav className="navbar fixed-bottom navbar-light bg-light">
-                    <h1 className='the-aux'>The-Aux</h1>
+                    <h1 className='copyright'>Copyright &copy; 2020</h1>
                 </nav>
             </React.Fragment>
         )

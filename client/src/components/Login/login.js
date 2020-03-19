@@ -63,6 +63,10 @@ class Login extends React.Component {
                     Login to spotify
                 </button>
 
+                <nav className="navbar fixed-bottom navbar-light bg-light">
+                    <h1 className='copyright'>Copyright &copy; 2020</h1>
+                </nav>
+
             </React.Fragment>
         )
     };
