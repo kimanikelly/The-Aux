@@ -25,6 +25,7 @@ var Spotify = require('spotify-web-api-js');
 // Initializes the Spotify Web API
 var spotifyApi = new Spotify();
 
+
 // ES6 class to define the Home component
 class Home extends React.Component {
     constructor(props) {
@@ -33,14 +34,7 @@ class Home extends React.Component {
         this.state = {
             displayName: '',
             email: '',
-            artist: '',
-            track: '',
         };
-
-        this.artistHandleChange = this.artistHandleChange.bind(this);
-        this.trackHandleChange = this.trackHandleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-
     };
 
     // The componentDidMount function will intitiate the Axios GET request once the Home component is rendered
@@ -65,58 +59,7 @@ class Home extends React.Component {
             .catch(function (err) {
                 console.log(err);
             });
-    };
 
-    artistHandleChange(event) {
-        this.setState({
-            artist: event.target.value
-        });
-    };
-
-    trackHandleChange(event) {
-        this.setState({
-            track: event.target.value
-        });
-    };
-
-    handleSubmit(event) {
-        event.preventDefault();
-
-        // The artist variable stores the value of the artist state
-        // The value of artist state will change depending on the artist input
-        var artist = this.state.artist;
-
-        // The track variable stores the value of the track state
-        // The value of track state will change depending on the track input
-        var track = this.state.track;
-
-        // The artistName variable will store artist searched for
-        // The artistTrack variable will store the track searched for
-        // The artistAlbum variable will store the album the searched track is located on
-        // The releaseDate variable will store the albums/tracks release date
-        // The albumImage variable will store the albums/tracks cover art
-        var artistName;
-        var artistTrack;
-        var artistAlbum;
-        var releaseDate;
-        var albumImage;
-
-        axios({
-            url: 'https://api.spotify.com/v1/me/player/currently-playing',
-            method: 'get',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + sessionStorage.getItem('key')
-
-            }
-        })
-            .then(function (res) {
-                console.log(res)
-            })
-            .catch(function (err) {
-                console.log(err)
-            })
 
         // Axios GET request 'token' API path
         axios.get('http://localhost:3000/token')
@@ -128,51 +71,34 @@ class Home extends React.Component {
                 // Stores the token in localStorage
                 sessionStorage.setItem('key', res.data.token);
 
-
-                // The spotifyApi searchTracks function used to search artists and their tracks
-                // The artist variable used as an input 
-                // The track variable used as an input
-                spotifyApi.searchTracks(artist + ':' + track)
-
-                    .then(function (data) {
-
-                        // Assigns the artistName the artists name requested from the search response
-                        // Assigns the artistTrack the track name requested from the search response
-                        // Assigns the artistAlbum the album name requested from the search response
-                        // Assigns the releaseDate the album/track release date
-                        // Assigns the albumImage the album/track cover art
-                        artistName = data.tracks.items[0].album.artists[0].name;
-                        artistTrack = data.tracks.items[0].name;
-                        artistAlbum = data.tracks.items[0].album.name;
-                        releaseDate = data.tracks.items[0].album.release_date;
-                        albumImage = data.tracks.items[0].album.images[0].url;
-
-                        console.log({
-                            artistName: artistName,
-                            artistTrack: artistTrack,
-                            artistAlbum: artistAlbum,
-                            releaseDate: releaseDate,
-                            albumImage: albumImage
-                        });
-
-                    }, function (err) {
-                        console.error(err);
-                    });
-
             })
             // If an error occurs during the GET request to the 'token' API it will be caught and logged to the console
             .catch(function (err) {
                 console.log(err);
             });
 
-        // Upon form submission the artist and track input fields will clear
-        // Sets the artist and track states to empty strings
-        this.setState({
-            artist: '',
-            track: ''
-        });
+        this.testing()
+
     };
 
+    testing() {
+        // Axios GET request 'token' API path
+        axios.get('http://localhost:3000/token')
+            .then(function (res) {
+
+                // Sets the Spotify access token
+                spotifyApi.setAccessToken(res.data.token);
+
+                // Stores the token in localStorage
+                sessionStorage.setItem('key', res.data.token);
+
+            })
+
+            // If an error occurs during the GET request to the 'token' API it will be caught and logged to the console
+            .catch(function (err) {
+                console.log(err)
+            });
+    }
 
     render() {
         return (
@@ -192,29 +118,17 @@ class Home extends React.Component {
                     <h1>Email: {this.state.email}</h1>
                 </div>
 
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Artist:
-                        <input type='text'
-                            placeholder='Search Artist'
-                            value={this.state.artist}
-                            onChange={this.artistHandleChange} />
-                    </label>
-
-                    <label>
-                        Track:
-                        <input type='text'
-                            placeholder='Search Track'
-                            value={this.state.track}
-                            onChange={this.trackHandleChange} />
-                    </label>
-                    <input type='submit' value='submit'></input>
-                </form>
-
                 <SpotifyPlayer
+                    play='true'
+                    magnifySliderOnHover='true'
+                    autoPlay='true'
                     token={sessionStorage.getItem('key')}
 
                 />
+
+                <nav className="navbar fixed-bottom navbar-light bg-light">
+                    <h1 className='the-aux'>The-Aux</h1>
+                </nav>
             </React.Fragment>
         )
     }
