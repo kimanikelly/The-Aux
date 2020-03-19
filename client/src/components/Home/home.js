@@ -133,7 +133,7 @@ class Home extends React.Component {
                 </div>
 
                 <nav className="navbar fixed-bottom navbar-light bg-light">
-                    <h1 className='copyright'>Copyright &copy; 2020</h1>
+                    <h3 className='copyright'>Copyright &copy; 2020</h3>
                 </nav>
             </React.Fragment>
         )
