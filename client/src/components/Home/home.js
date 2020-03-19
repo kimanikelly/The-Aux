@@ -101,6 +101,23 @@ class Home extends React.Component {
         var releaseDate;
         var albumImage;
 
+        axios({
+            url: 'https://api.spotify.com/v1/me/player/currently-playing',
+            method: 'get',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('key')
+
+            }
+        })
+            .then(function (res) {
+                console.log(res)
+            })
+            .catch(function (err) {
+                console.log(err)
+            })
+
         // Axios GET request 'token' API path
         axios.get('http://localhost:3000/token')
             .then(function (res) {
@@ -109,7 +126,8 @@ class Home extends React.Component {
                 spotifyApi.setAccessToken(res.data.token);
 
                 // Stores the token in localStorage
-                localStorage.setItem('key', res.data.token);
+                sessionStorage.setItem('key', res.data.token);
+
 
                 // The spotifyApi searchTracks function used to search artists and their tracks
                 // The artist variable used as an input 
@@ -155,6 +173,7 @@ class Home extends React.Component {
         });
     };
 
+
     render() {
         return (
             <React.Fragment>
@@ -193,7 +212,7 @@ class Home extends React.Component {
                 </form>
 
                 <SpotifyPlayer
-                    token={localStorage.getItem('key')}
+                    token={sessionStorage.getItem('key')}
 
                 />
             </React.Fragment>
