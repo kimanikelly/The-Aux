@@ -14,7 +14,8 @@ module.exports = function (app) {
         // The user-read-private scope reads access to user’s subscription details (type of user account).
         // The user-read-email scope reads access to user’s email address.
 
-        scope: ['user-read-email', 'user-read-private', 'user-read-playback-state', 'streaming', 'user-modify-playback-state']
+        scope: ['user-read-email', 'user-read-private', 'user-read-playback-state', 'streaming', 'user-modify-playback-state', 'user-library-read',
+            'user-library-modify']
         , showDialog: true
     }), function (req, res) {
         // The request will be redirected to spotify for authentication, so this
