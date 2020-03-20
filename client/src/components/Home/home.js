@@ -25,6 +25,7 @@ var Spotify = require('spotify-web-api-js');
 // Initializes the Spotify Web API
 var spotifyApi = new Spotify();
 
+var spotifyImage = require('../../images/spotify-image.png');
 
 // ES6 class to define the Home component
 class Home extends React.Component {
@@ -60,28 +61,6 @@ class Home extends React.Component {
                 console.log(err);
             });
 
-
-        // Axios GET request 'token' API path
-        axios.get('http://localhost:3000/token')
-            .then(function (res) {
-
-                // Sets the Spotify access token
-                spotifyApi.setAccessToken(res.data.token);
-
-                // Stores the token in localStorage
-                sessionStorage.setItem('key', res.data.token);
-
-            })
-            // If an error occurs during the GET request to the 'token' API it will be caught and logged to the console
-            .catch(function (err) {
-                console.log(err);
-            });
-
-        this.accessToken();
-
-    };
-
-    accessToken() {
         // Axios GET request 'token' API path
         axios.get('http://localhost:3000/token')
             .then(function (res) {
@@ -98,7 +77,7 @@ class Home extends React.Component {
             .catch(function (err) {
                 console.log(err)
             });
-    }
+    };
 
     render() {
         return (
@@ -119,6 +98,10 @@ class Home extends React.Component {
 
                 <div id='email'>
                     <h1>Spotify Email: {this.state.email}</h1>
+                </div>
+
+                <div id='image-div'>
+                    <img src={spotifyImage} alt='Spotify logo' />
                 </div>
 
                 <div id='player'>

@@ -10,8 +10,10 @@ body {
 .the-aux {
     color:whitesmoke;
     text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color:gray;
     font-weight: bold;
-    margin-left:43%;
+    margin-left:45%;
  
 }
 
@@ -20,11 +22,15 @@ body {
     background-color:rgb(11, 194, 90);
     display: block;
     margin:0 auto;
-    text-transform:uppercase;
     font-size:30px;
     font-weight:bold;
     margin-top:12%;
     border:4px solid grey;
     border-radius:32px;
   
+}
+
+#log-in-button:hover {
+    background-color:gray;
+    border-color:rgb(11, 194, 90);
 }

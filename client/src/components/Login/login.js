@@ -60,7 +60,7 @@ class Login extends React.Component {
                     // When this button is clicked the handleClick function is performed
                     // Redirecting to the Spotify authorization page is done by clicking the button
                     onClick={this.handleClick}>
-                    Login to spotify
+                    <h3>Login To Spotify</h3>
                 </button>
 
                 <nav className="navbar fixed-bottom navbar-light bg-light">
