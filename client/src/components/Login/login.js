@@ -44,6 +44,10 @@ class Login extends React.Component {
             });
     };
 
+    testRoute() {
+        window.location = 'http://localhost:3000/auth/spotify'
+    }
+
     render() {
         return (
             <React.Fragment>
