@@ -10,8 +10,6 @@ body {
 .the-aux {
     color:whitesmoke;
     text-transform: uppercase;
-    text-decoration: underline;
-    text-decoration-color:gray;
     font-weight: bold;
     margin-left:45%;
  
@@ -28,6 +26,10 @@ body {
     border:4px solid grey;
     border-radius:32px;
   
+}
+
+span {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 #log-in-button:hover {

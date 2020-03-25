@@ -43,7 +43,7 @@ var express = require('express');
 var app = express();
 
 // Sets the port the express server will be running on
-var PORT = process.env.PORT = 3000;
+var PORT = process.env.PORT || 3000;
 
 // Loads the UserSchema
 var SpotifyUserModel = require('./models/User');
@@ -135,6 +135,7 @@ mongoose.connect('mongodb://127.0.0.1/spotify_users', {
 
 // Starts the express server
 app.listen(PORT, function () {
+
     console.log('Connected on port:' + PORT);
 });
 

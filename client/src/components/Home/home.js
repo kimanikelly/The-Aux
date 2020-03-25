@@ -111,7 +111,6 @@ class Home extends React.Component {
                         magnifySliderOnHover='true'
                         autoPlay='true'
                         token={sessionStorage.getItem('key')}
-
                     />
                 </div>
 

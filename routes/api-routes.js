@@ -13,13 +13,10 @@ module.exports = function (app) {
 
         // The user-read-private scope reads access to user’s subscription details (type of user account).
         // The user-read-email scope reads access to user’s email address.
-
         scope: ['user-read-email', 'user-read-private', 'user-read-playback-state', 'streaming', 'user-modify-playback-state', 'user-library-read',
             'user-library-modify']
         , showDialog: true
-    }), function (req, res) {
-        // The request will be redirected to spotify for authentication, so this
-        // function will not be called.
+    }), function (req, res, next) {
 
     });
 
@@ -27,7 +24,7 @@ module.exports = function (app) {
     app.get(
         '/auth/spotify/callback',
         passport.authenticate('spotify', { failureRedirect: '/' }),
-        function (req, res) {
+        function (req, res, next) {
             // Successful authentication, redirect home.
             res.redirect('http://localhost:3001/home');
         }
