@@ -2,6 +2,7 @@
   "name": "spotify-playlist",
   "version": "0.1.0",
   "private": true,
+  "proxy":"http://localhost:3000/auth/spotify",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -27,8 +28,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app",
-    "Access-Control-Allow-Origin": "*"
+    "extends": "react-app"
   },
   "browserslist": {
     "production": [
@@ -41,6 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "proxy":"http://localhost:3000/auth/spotify"
+  }
 }

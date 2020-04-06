@@ -1,4 +1,3 @@
-var corsBypass = require('cors-bypass')
 
 // Loads the path module as a dependency
 // Provides a way to work with filepaths and directories
