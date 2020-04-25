@@ -38,6 +38,7 @@ class Login extends React.Component {
 
                 // Redirects the browser to the Spotify authorization page
                 window.location = 'http://localhost:3000/auth/spotify'
+
             })
             // If there’s a problem with the request, the promise will be rejected with an error object
             .catch(function (err) {

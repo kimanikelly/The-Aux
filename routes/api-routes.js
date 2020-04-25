@@ -3,17 +3,7 @@ var passport = require('passport');
 
 var SpotifyUserModel = require('../models/User');
 
-var access = require('access-control');
-
 module.exports = function (app) {
-    // app.use(function (req, res) {
-    //     res.header('Access-Control-Allow-Origin', '*');
-    //     res.header('Access-Control-Allow-Headers',
-    //         'Origin',
-    //         'X-Requested-With, Content-Type, Accept, Authorization'
-    //     );
-
-    // })
 
     // Initiates Oauth transaction and redirects the user to Spotify
     app.get('/auth/spotify', passport.authenticate('spotify', {
