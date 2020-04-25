@@ -12,7 +12,7 @@
     "react-helmet": "^5.2.1",
     "react-router-dom": "^5.1.2",
     "react-script-tag": "^1.1.2",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.4.0",
     "react-spotify-player": "^1.0.4",
     "react-spotify-web-playback": "^0.6.0",
     "spotify-control": "^0.1.0",
