@@ -6,7 +6,6 @@ import React from 'react';
 // Will be used to set the page title
 import { Helmet } from 'react-helmet';
 
-
 // Allows for HTTP requests on the client side to retrieve/communicate
 // With server side data(api-routes and database) and return responses
 // Promised based HTTP client

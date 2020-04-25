@@ -1,5 +1,5 @@
 {
-  "name": "The-Aux",
+  "name":"the-aux",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -10,9 +10,6 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kimanikelly/The-Aux.git"
-  },
-  "engines": {
-    "node": "10.16.0"
   },
   "keywords": [],
   "author": "",

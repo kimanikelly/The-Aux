@@ -47,8 +47,6 @@ var cors = require('cors');
 
 app.use(cors());
 
-const { createProxyMiddleware } = require('http-proxy-middleware');
-
 // Sets the port the express server will be running on
 var PORT = process.env.PORT || 3000;
 
@@ -69,13 +67,6 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
     done(null, user);
 });
-
-app.use('http://localhost:3000/auth/spotify', createProxyMiddleware
-    ({
-        target: 'http://localhost:3001',
-        changeOrigin: true
-    })
-);
 
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
