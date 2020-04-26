@@ -6,7 +6,7 @@ var SpotifyUserModel = require('../models/User');
 module.exports = function (app) {
 
     // Initiates Oauth transaction and redirects the user to Spotify
-    app.get('/auth/spotify', cors(corsOptionsDelegate), passport.authenticate('spotify', {
+    app.get('/auth/spotify', passport.authenticate('spotify', {
 
         // Scopes provide Spotify users using third-party apps the confidence that only the
         // information they choose to share will be shared, and nothing more
