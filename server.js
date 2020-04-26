@@ -135,7 +135,7 @@ passport.use(new SpotifyStrategy(
 );
 
 // Connects the database to MongoDB
-mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds335275.mlab.com:35275/heroku_4597lt17', {
+mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds335275.mlab.com:35275/heroku_4597lt17', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
