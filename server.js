@@ -37,6 +37,12 @@ var clientSecret = credentials.credentials.secret;
 // Stores the Spotify redirect uri
 var redirectUri = credentials.credentials.redirectUri;
 
+// Stores the MongoLab database user
+var databaseUser = credentials.credentials.mongoDatabaseUser;
+
+// Stores the MongoLab database password
+var databasePassword = credentials.credentials.mongoDatabasePassword;
+
 // Loads the express module as a dependency
 var express = require('express');
 
