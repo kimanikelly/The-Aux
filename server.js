@@ -134,27 +134,8 @@ passport.use(new SpotifyStrategy(
 )
 );
 
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-    // Although this references the build folder... 
-    // Use the public folder in client/public to publish images/css/any static file
-    // express.static is in charge of sending static files requests to the client.
-    app.use(express.static("client/build"));
-    // client/public is the actual folder to use for static files
-};
-
-// app.get("*", function (req, res) {
-//     if (process.env.NODE_ENV === "production") {
-//         res.sendFile(path.join(__dirname, "./client/build/index.html"));
-//     }
-//     else {
-//         // reminder
-//         res.json({ "message": "Go to http://localhost:3001" });
-//     }
-// });
-
 // Connects the database to MongoDB
-mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds335275.mlab.com:35275/heroku_4597lt17', {
+mongoose.connect('mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
