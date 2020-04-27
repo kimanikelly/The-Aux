@@ -143,15 +143,15 @@ if (process.env.NODE_ENV === "production") {
     // client/public is the actual folder to use for static files
 };
 
-app.get("*", function (req, res) {
-    if (process.env.NODE_ENV === "production") {
-        res.sendFile(path.join(__dirname, "./client/build/index.html"));
-    }
-    else {
-        // reminder
-        res.json({ "message": "Go to http://localhost:3001" });
-    }
-});
+// app.get("*", function (req, res) {
+//     if (process.env.NODE_ENV === "production") {
+//         res.sendFile(path.join(__dirname, "./client/build/index.html"));
+//     }
+//     else {
+//         // reminder
+//         res.json({ "message": "Go to http://localhost:3001" });
+//     }
+// });
 
 // Connects the database to MongoDB
 mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds335275.mlab.com:35275/heroku_4597lt17', {
