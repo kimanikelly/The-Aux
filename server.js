@@ -75,8 +75,6 @@ passport.deserializeUser(function (user, done) {
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
 
-
-
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
@@ -131,21 +129,21 @@ passport.use(new SpotifyStrategy(
     }
 )
 );
-// Serve up static assets (usually on heroku)
-if (process.env.NODE_ENV === "production") {
-    // Although this references the build folder... 
-    // Use the public folder in client/public to publish images/css/any static file
-    // express.static is in charge of sending static files requests to the client.
-    app.use(express.static("client/build"));
-    // client/public is the actual folder to use for static files
-};
 
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('/', function(req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
-// Connects the database to MongoDB
-mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68', {
+mongoose.connect('mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+// // Connects the database to MongoDB
+// mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
 
 // Starts the express server
 app.listen(PORT, function () {
