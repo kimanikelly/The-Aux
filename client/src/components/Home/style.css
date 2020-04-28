@@ -47,6 +47,10 @@ img {
     height:200px;
 }
 
+img:hover {
+    opacity:.5;
+}
+
 .fixed-bottom {
     border-top:3px solid rgb(11, 194, 90);
     border-bottom:none;

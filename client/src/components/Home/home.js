@@ -101,7 +101,9 @@ class Home extends React.Component {
                 </div>
 
                 <div id='image-div'>
-                    <img src={spotifyImage} alt='Spotify logo' />
+                    <a href='https://open.spotify.com/' target='_blank' rel='noopener noreferrer'>
+                        <img src={spotifyImage} alt='Spotify logo' />
+                    </a>
                 </div>
 
                 <div id='player'>
