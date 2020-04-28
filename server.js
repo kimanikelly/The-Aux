@@ -130,20 +130,15 @@ passport.use(new SpotifyStrategy(
 )
 );
 
-app.use(express.static(path.join(__dirname, 'build')));
-app.get('/', function(req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-
-mongoose.connect('mongodb://127.0.0.1/spotify_users', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-// // Connects the database to MongoDB
-// mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68', {
+// mongoose.connect('mongodb://127.0.0.1/spotify_users', {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // });
+// Connects the database to MongoDB
+mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 // Starts the express server
 app.listen(PORT, function () {
