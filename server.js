@@ -59,7 +59,8 @@ var SpotifyUserModel = require('./models/User');
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// Required to initialize passport
+
+// Required to initialize passport with the express server
 app.use(passport.initialize());
 
 passport.serializeUser(function (user, done) {
@@ -74,10 +75,14 @@ passport.deserializeUser(function (user, done) {
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
 
-app.use(express.static("client/build"));
-app.set('views', __dirname + './client/build/index.html');
-app.set('view engine', 'jsx');
-app.engine('jsx', require('express-react-views').createEngine());
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+    // Although this references the build folder... 
+    // Use the public folder in client/public to publish images/css/any static file
+    // express.static is in charge of sending static files requests to the client.
+    app.use(express.static("client/build"));
+    // client/public is the actual folder to use for static files
+};
 
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
@@ -142,7 +147,6 @@ mongoose.connect('mongodb://127.0.0.1/spotify_users', {
 
 // Starts the express server
 app.listen(PORT, function () {
-
     console.log('Connected on port:' + PORT);
 });
 
