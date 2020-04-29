@@ -147,7 +147,7 @@ mongoose.connect('mongodb://127.0.0.1/spotify_users', {
 });
 
 // Starts the express server
-app.listen(PORT, function () {
+app.listen(process.env.PORT || 3000, function () {
     console.log('Connected on port:' + PORT);
 });
 
