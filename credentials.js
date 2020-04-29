@@ -3,5 +3,6 @@ exports.credentials = {
     secret: process.env.SPOTIFY_CLIENT_SECRET,
     redirectUri: process.env.SPOTIFY_REDIRECT_URI,
     mongoDatabaseUser: process.env.MONGO_DATABASE_USER,
-    mongoDatabasePassword: process.env.MONGO_DATABASE_PASSWORD
+    mongoDatabasePassword: process.env.MONGO_DATABASE_PASSWORD,
+    mongoDatabaseUri = process.env.MongoDB_URI
 };

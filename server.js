@@ -139,16 +139,12 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 // process.env.MONGODB_URI
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/spotify_users', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
-
-// Connects the database to MongoDB
-mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
+
+
 
 // Starts the express server
 app.listen(PORT, function () {
