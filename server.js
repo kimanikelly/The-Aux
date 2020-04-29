@@ -43,6 +43,8 @@ var databaseUser = credentials.credentials.mongoDatabaseUser;
 // Stores the MongoLab database password
 var databasePassword = credentials.credentials.mongoDatabasePassword;
 
+var databaseUri = credentials.credentials.mongoDatabaseUri;
+
 // Loads the express module as a dependency
 var express = require('express');
 
@@ -139,7 +141,7 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 // process.env.MONGODB_URI
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/spotify_users', {
+mongoose.connect( 'mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });

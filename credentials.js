@@ -4,5 +4,5 @@ exports.credentials = {
     redirectUri: process.env.SPOTIFY_REDIRECT_URI,
     mongoDatabaseUser: process.env.MONGO_DATABASE_USER,
     mongoDatabasePassword: process.env.MONGO_DATABASE_PASSWORD,
-    mongoDatabaseUri = process.env.MongoDB_URI
+    mongoDatabaseUri: process.env.MONGODB_URI
 };
