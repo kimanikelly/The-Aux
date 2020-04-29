@@ -141,7 +141,8 @@ passport.use(new SpotifyStrategy(
 );
 
 // process.env.MONGODB_URI
-mongoose.connect('mongodb://127.0.0.1/spotify_users', {
+mongoose.connect('mongodb://' + databaseUser + ':' + databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68' ||
+    'mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
