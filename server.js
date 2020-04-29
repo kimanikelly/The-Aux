@@ -85,12 +85,6 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-// process.env.MONGODB_URI
-mongoose.connect('mongodb://127.0.0.1/spotify_users', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
-
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
@@ -145,6 +139,12 @@ passport.use(new SpotifyStrategy(
     }
 )
 );
+
+// process.env.MONGODB_URI
+mongoose.connect('mongodb://127.0.0.1/spotify_users', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 // Starts the express server
 app.listen(PORT, function () {
