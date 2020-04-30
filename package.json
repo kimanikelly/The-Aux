@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js concurrently “npm run server” “npm run client",
     "client":"cd client && npm start",
-    "heroku-postbuild":"cd client && npm install && npm run build"
+    "heroku-postbuild":"cd client && yarn install && yarn run build"
   },
   "repository": {
     "type": "git",
