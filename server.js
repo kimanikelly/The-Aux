@@ -139,7 +139,6 @@ passport.use(new SpotifyStrategy(
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
 
-
 // process.env.MONGODB_URI
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':' +
 //     databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68', {
