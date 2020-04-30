@@ -80,10 +80,6 @@ if (process.env.NODE_ENV === 'production') {
     })
 }
 
-// Loads the api-routes to server.js
-// Allows for custom API building with Express
-require('./routes/api-routes')(app);
-
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
@@ -138,6 +134,11 @@ passport.use(new SpotifyStrategy(
     }
 )
 );
+
+// Loads the api-routes to server.js
+// Allows for custom API building with Express
+require('./routes/api-routes')(app);
+
 
 // process.env.MONGODB_URI
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':' +
