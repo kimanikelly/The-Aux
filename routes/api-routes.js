@@ -23,8 +23,13 @@ module.exports = function (app) {
         , showDialog: true
 
     }), function (req, res) {
-
     });
+
+    app.post('/test', (req, res) => {
+        res.json({
+            test:"this works"
+        })
+    })
 
     // Redirects the user back to the app on successful authorization
     app.get(
@@ -33,7 +38,7 @@ module.exports = function (app) {
         passport.authenticate('spotify', {
 
             failureRedirect: '/',
-            
+
         }),
 
         function (req, res, next) {

@@ -6,11 +6,6 @@ import React from 'react';
 // Will be used to set the page title
 import { Helmet } from 'react-helmet';
 
-// Allows for HTTP requests on the client side to retrieve/communicate
-// With server side data(api-routes and database) and return responses
-// Promised based HTTP client
-import axios from 'axios';
-
 // Loads the CSS stylesheet into login.js
 import './style.css';
 
@@ -22,27 +17,8 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
 
-        // This binding is necessary to make `this` work in the callback
-        this.handleClick = this.handleClick.bind(this)
-    };
-
-    // The Event handler responsible for sending the user to the Spotify authorization page
-    handleClick(event) {
-
-        // HTTP GET route path
-        axios.get('http://localhost:3000/auth/spotify')
-
-            // Callback returns the response object(Spotify authorization data)
-            .then(function (res) {
-
-                // Redirects the browser to the Spotify authorization page
-                window.location = 'http://localhost:3000/auth/spotify'
-
-            })
-            // If there’s a problem with the request, the promise will be rejected with an error object
-            .catch(function (err) {
-                console.log(err);
-            });
+        // // This binding is necessary to make `this` work in the callback
+        // this.handleClick = this.handleClick.bind(this)
     };
 
     render() {
@@ -57,12 +33,12 @@ class Login extends React.Component {
                     <h1 className='the-aux'>The-Aux</h1>
                 </nav>
 
-                <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'
+                <a href='http://localhost:3000/auth/spotify'><button type="button" className="btn btn-secondary btn-lg" id='log-in-button'
                     // When this button is clicked the handleClick function is performed
                     // Redirecting to the Spotify authorization page is done by clicking the button
                     onClick={this.handleClick}>
                     <span>Login With Spotify</span>
-                </button>
+                </button></a>
 
                 <nav className="navbar fixed-bottom navbar-light bg-light">
                     <h3 className='copyright'>Copyright &copy; 2020</h3>
