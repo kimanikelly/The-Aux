@@ -144,10 +144,13 @@ passport.use(new SpotifyStrategy(
 )
 );
 
-mongoose.connect(process.env.databaseUri || 'mongodb://127.0.0.1/spotify_users', {
+mongoose.connect(process.env.databaseUri, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
+    .catch((err) => {
+        console.log(err)
+    })
 
 // Starts the express server
 app.listen(PORT, function () {
