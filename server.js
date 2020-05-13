@@ -99,6 +99,7 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
+
         SpotifyUserModel.findOne(
             {
                 spotifyId: profile.id,
@@ -139,15 +140,7 @@ passport.use(new SpotifyStrategy(
 )
 );
 
-// process.env.MONGODB_URI
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':' +
-//     databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// }
-// );
-
-mongoose.connect(process.env.MONGODB_URI ||'mongodb://localhost/spotify_users', {
+mongoose.connect('mongodb://localhost/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })

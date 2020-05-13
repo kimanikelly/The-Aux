@@ -3,7 +3,11 @@ var passport = require('passport');
 
 var SpotifyUserModel = require('../models/User');
 
+var cors = require('cors');
+
 module.exports = function (app) {
+
+    app.use(cors())
 
     // Initiates Oauth transaction and redirects the user to Spotify
     app.get('/auth/spotify', passport.authenticate('spotify', {
@@ -27,7 +31,7 @@ module.exports = function (app) {
 
     app.post('/test', (req, res) => {
         res.json({
-            test:"this works"
+            test: "this works"
         })
     })
 
@@ -48,12 +52,14 @@ module.exports = function (app) {
         }
     );
 
-    app.get('/users', function (req, res) {
+    app.post('/users', function (req, res) {
 
         SpotifyUserModel.find(function (err, spotifyUsers) {
             if (err) {
                 console.log(err)
             };
+
+            console.log(spotifyUsers.length)
 
             // SpotifyUsers returns an array of objects storing all users and their credentials
             // The recentUser variable stores the recent user logged in of the SpotifyUsers array

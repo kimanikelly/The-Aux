@@ -43,7 +43,7 @@ class Home extends React.Component {
     componentDidMount() {
 
         // Axios GET request 'users' API path
-        axios.get('http://localhost:3000/users')
+        axios.post('http://localhost:3000/users')
 
             // The .then() promise will return the Spotify user data object as the response(res)
             // ES6 arrow function used to perform the promise
@@ -60,6 +60,7 @@ class Home extends React.Component {
             .catch(function (err) {
                 console.log(err);
             });
+
 
         // Axios GET request 'token' API path
         axios.get('http://localhost:3000/token')
