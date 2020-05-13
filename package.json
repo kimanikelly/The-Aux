@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "PORT=3000 node start server.js",
+    "start": "node start server.js",
     "client": "cd client && npm start"
   },
   "repository": {
