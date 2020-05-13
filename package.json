@@ -19,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/kimanikelly/The-Aux/issues"
   },
-  "homepage": "https://github.com/kimanikelly/The-Aux#readme",
+  "homepage": "/build",
   "dependencies": {
     "access-control": "^1.0.1",
     "body-parser": "^1.19.0",
