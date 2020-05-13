@@ -45,7 +45,7 @@ module.exports = function (app) {
         function (req, res) {
 
             // Successful authentication, redirect home.
-            res.redirect('/');
+            res.redirect('http://localhost:3001/home');
         }
     );
 
