@@ -14,12 +14,6 @@ var pageTitle = 'The-Aux | Login'
 
 // ES6 class to define the Login component
 class Login extends React.Component {
-    constructor(props) {
-        super(props);
-
-        // // This binding is necessary to make `this` work in the callback
-        // this.handleClick = this.handleClick.bind(this)
-    };
 
     render() {
         return (
