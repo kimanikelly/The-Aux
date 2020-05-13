@@ -135,16 +135,7 @@ passport.use(new SpotifyStrategy(
     }
 )
 );
-
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'))
-
-    app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-    })
-}
-
-mongoose.connect('mongodb://127.0.0.1/spotify_users', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -154,7 +145,14 @@ mongoose.connect('mongodb://127.0.0.1/spotify_users', {
     .catch((err) => {
         console.log(err)
     })
- 
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
+
+    app.get('*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    })
+}
+
 // Starts the express server
 app.listen(PORT, function () {
     console.log('Connected on port:' + PORT);
