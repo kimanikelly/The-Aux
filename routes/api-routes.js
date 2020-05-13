@@ -53,8 +53,6 @@ module.exports = function (app) {
                 console.log(err)
             };
 
-            console.log(spotifyUsers.length)
-
             // SpotifyUsers returns an array of objects storing all users and their credentials
             // The recentUser variable stores the recent user logged in of the SpotifyUsers array
             var recentUser = spotifyUsers.slice(-1);
