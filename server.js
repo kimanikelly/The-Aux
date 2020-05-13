@@ -72,6 +72,9 @@ passport.deserializeUser(function (user, done) {
     done(null, user);
 });
 
+// Loads the api-routes to server.js
+// Allows for custom API building with Express
+require('./routes/api-routes')(app);
 
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
@@ -80,10 +83,6 @@ if (process.env.NODE_ENV === 'production') {
         res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
     })
 }
-
-// Loads the api-routes to server.js
-// Allows for custom API building with Express
-require('./routes/api-routes')(app);
 
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
@@ -114,13 +113,17 @@ passport.use(new SpotifyStrategy(
                     console.log(err);
                 };
 
+                // Creates a new instance of the SpotifyUserModel
                 var newSpotifyUser = new SpotifyUserModel({
+
+                    // Builds the new user infortmation based from the SpotifyUserModel
                     spotifyProfileId: profile.id,
                     spotifyUserName: profile.username,
                     email: profile._json.email,
                     token: accessToken
                 });
 
+                // Adds the new user signed in to the database
                 newSpotifyUser.save(function (err) {
                     if (err) {
                         console.log(err);
