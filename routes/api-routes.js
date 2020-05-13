@@ -1,12 +1,15 @@
 // Requiring the passport module as a dependency
 var passport = require('passport');
 
+// Access to the SpotifyUserModel
 var SpotifyUserModel = require('../models/User');
 
+// Requires the cors module as a dependency
 var cors = require('cors');
 
 module.exports = function (app) {
 
+    // Connecting cors and express as middleware to bypass CORS
     app.use(cors())
 
     // Initiates Oauth transaction and redirects the user to Spotify

@@ -48,6 +48,7 @@ class Home extends React.Component {
             // The .then() promise will return the Spotify user data object as the response(res)
             // ES6 arrow function used to perform the promise
             .then((res) => {
+                console.log(res)
 
                 // Sets the displayName state to the logged in users Spotify display name from response(res)
                 // Sets the email state to the logged in users Spotify email from response(res)
