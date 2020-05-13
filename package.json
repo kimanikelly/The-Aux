@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "build": "webpack",
+    "start": "PORT=3000 node start ./server.js",
     "client": "cd client && npm start"
   },
   "repository": {
