@@ -72,14 +72,6 @@ passport.deserializeUser(function (user, done) {
     done(null, user);
 });
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'))
-
-    app.get('*', function (req, res) {
-        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
-    })
-}
-
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
@@ -139,7 +131,13 @@ passport.use(new SpotifyStrategy(
     }
 )
 );
+if (process.env.NODE_ENV === 'production') {
+    app.use(express.static('client/build'))
 
+    app.get('*', function (req, res) {
+        res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+    })
+}
 mongoose.connect(process.env.databaseUri || 'mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
