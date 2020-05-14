@@ -76,6 +76,15 @@ passport.deserializeUser(function (user, done) {
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
 
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .catch((err) => {
+        console.log(err);
+    })
+
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
@@ -135,15 +144,6 @@ passport.use(new SpotifyStrategy(
     }
 )
 );
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .catch((err) => {
-        console.log(err);
-    })
-
 
 // // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -163,13 +163,13 @@ app.get("*", (req, res) => {
 });
 
 var reqTimer = setTimeout(function wakeUp() {
-    request("https://the-aux.herokuapp.com", function() {
-       console.log("WAKE UP DYNO");
+    request("https://the-aux.herokuapp.com", function () {
+        console.log("WAKE UP DYNO");
     });
     return reqTimer = setTimeout(wakeUp, 1200000);
- }, 1200000);
+}, 1200000);
 
- 
+
 // Starts the express server
 app.listen(PORT, function () {
     console.log('Connected on port:' + PORT);
