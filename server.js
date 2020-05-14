@@ -151,7 +151,7 @@ if (process.env.NODE_ENV === "production") {
     // Although this references the build folder... 
     // Use the public folder in client/public to publish images/css/any static file
     // express.static is in charge of sending static files requests to the client.
-    app.use(express.static("client/public"));
+    app.use(express.static("client/public/index.html"));
     // client/public is the actual folder to use for static files
 };
 
