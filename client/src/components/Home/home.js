@@ -25,9 +25,6 @@ var Spotify = require('spotify-web-api-js');
 // Initializes the Spotify Web API
 var spotifyApi = new Spotify();
 
-// Will store the accessToken
-var accessToken;
-
 // Imports the image and stores the value
 var spotifyImage = require('../../images/spotify-image.png');
 
@@ -60,7 +57,7 @@ class Home extends React.Component {
                 sessionStorage.setItem('key', res.data.Token);
 
                 // Sets accessToken variable the value of Token returned from the GET request
-                accessToken = await sessionStorage.getItem('key', res.data.Token);
+                await sessionStorage.getItem('key', res.data.Token);
 
                 // Sets the displayName state to the logged in users Spotify display name from response(res)
                 // Sets the email state to the logged in users Spotify email from response(res)
@@ -108,7 +105,7 @@ class Home extends React.Component {
                         play='true'
                         magnifySliderOnHover='true'
                         autoPlay='true'
-                        token={accessToken}
+                        token={sessionStorage.getItem('key')}
                     />
                 </div>
 
