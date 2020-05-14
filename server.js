@@ -52,7 +52,7 @@ var express = require('express');
 var app = express();
 
 // Sets the port the express server will be running on
-var PORT = process.env.PORT || 3001;
+var PORT = process.env.PORT || 3000;
 
 // Loads the UserSchema
 var SpotifyUserModel = require('./models/User');
