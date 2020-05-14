@@ -77,7 +77,7 @@ passport.deserializeUser(function (user, done) {
 require('./routes/api-routes')(app);
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd' || 'mongodb://localhost/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -155,10 +155,11 @@ if (process.env.NODE_ENV === "production") {
 };
 
 app.get("*", (req, res) => {
+    console.log(res)
     if (process.env.NODE_ENV === "production") {
         res.sendFile(path.join(__dirname, "./client/build"));
     } else {
-        res.json('Failed to render')
+        console.log("Home page failed to render")
     }
 });
 
