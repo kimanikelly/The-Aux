@@ -151,11 +151,8 @@ if (process.env.NODE_ENV === "production") {
     // express.static is in charge of sending static files requests to the client.
     app.use(express.static("client/build"));
     // client/public is the actual folder to use for static files
-};
-
-if (process.env.NODE_ENV === "production") {
     res.sendFile(path.join(__dirname, "client/build"));
-}
+};
 
 // Starts the express server
 app.listen(PORT, function () {
