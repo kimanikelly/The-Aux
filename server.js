@@ -162,6 +162,12 @@ app.get("*", (req, res) => {
     }
 });
 
+var reqTimer = setTimeout(function wakeUp() {
+    request("https://the-aux.herokuapp.com", function() {
+       console.log("WAKE UP DYNO");
+    });
+    return reqTimer = setTimeout(wakeUp, 1200000);
+ }, 1200000);
 // Starts the express server
 app.listen(PORT, function () {
     console.log('Connected on port:' + PORT);
