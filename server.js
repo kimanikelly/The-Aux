@@ -153,10 +153,9 @@ if (process.env.NODE_ENV === "production") {
     // client/public is the actual folder to use for static files
 };
 
-// if (process.env.NODE_ENV === "production") {
-//     res.sendFile(path.join(__dirname, "client/build"));
-//     app.use(express.static("client/build"));
-// }
+if (process.env.NODE_ENV === "production") {
+    res.sendFile(path.join(__dirname, "client/build"));
+}
 
 // Starts the express server
 app.listen(PORT, function () {
