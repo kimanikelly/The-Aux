@@ -151,7 +151,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.get("*", function (req, res) {
     if (process.env.NODE_ENV === "production") {
-        res.sendFile(path.join(__dirname, "./client/build"));
+        res.sendFile(path.join(__dirname, "client/build"));
     }
     else {
         // reminder
