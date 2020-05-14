@@ -25,6 +25,10 @@ var Spotify = require('spotify-web-api-js');
 // Initializes the Spotify Web API
 var spotifyApi = new Spotify();
 
+// Will store the accessToken
+var accessToken;
+
+// Imports the image and stores the value
 var spotifyImage = require('../../images/spotify-image.png');
 
 // ES6 class to define the Home component
@@ -38,8 +42,8 @@ class Home extends React.Component {
         };
     };
 
-    // The componentDidMount function will intitiate the Axios GET request once the Home component is rendered
-    // The API path 'users' will return the logged in users Spotify display name and email address
+    // // The componentDidMount function will intitiate the Axios GET request once the Home component is rendered
+    // // The API path 'users' will return the logged in users Spotify display name and email address
     componentDidMount() {
 
         // Axios GET request 'users' API path
@@ -47,8 +51,16 @@ class Home extends React.Component {
 
             // The .then() promise will return the Spotify user data object as the response(res)
             // ES6 arrow function used to perform the promise
-            .then((res) => {
-                console.log(res)
+            .then(async (res) => {
+
+                // Sets the Spotify access token
+                spotifyApi.setAccessToken(res.data.Token);
+
+                // Stores the token in localStorage
+                sessionStorage.setItem('key', res.data.Token);
+
+                // Sets accessToken variable the value of Token returned from the GET request
+                accessToken = await sessionStorage.getItem('key', res.data.Token);
 
                 // Sets the displayName state to the logged in users Spotify display name from response(res)
                 // Sets the email state to the logged in users Spotify email from response(res)
@@ -60,24 +72,6 @@ class Home extends React.Component {
             // If an error occurs during the GET request to the 'users' API it will be caught and logged to the console
             .catch(function (err) {
                 console.log(err);
-            });
-
-
-        // Axios GET request 'token' API path
-        axios.get('http://localhost:3000/token')
-            .then(function (res) {
-
-                // Sets the Spotify access token
-                spotifyApi.setAccessToken(res.data.token);
-
-                // Stores the token in localStorage
-                sessionStorage.setItem('key', res.data.token);
-
-            })
-
-            // If an error occurs during the GET request to the 'token' API it will be caught and logged to the console
-            .catch(function (err) {
-                console.log(err)
             });
     };
 
@@ -114,7 +108,7 @@ class Home extends React.Component {
                         play='true'
                         magnifySliderOnHover='true'
                         autoPlay='true'
-                        token={sessionStorage.getItem('key')}
+                        token={accessToken}
                     />
                 </div>
 

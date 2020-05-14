@@ -135,16 +135,11 @@ passport.use(new SpotifyStrategy(
     }
 )
 );
+
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-    .then((res) => {
-
-    })
-    .catch((err) => {
-        console.log(err)
-    })
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -157,7 +152,7 @@ if (process.env.NODE_ENV === "production") {
 
 app.get("*", function (req, res) {
     if (process.env.NODE_ENV === "production") {
-        res.sendFile(path.join(__dirname, "./client/build/index.html"));
+        res.sendFile(path.join(__dirname, "./client/build"));
     }
     else {
         // reminder
