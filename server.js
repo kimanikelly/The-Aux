@@ -136,10 +136,13 @@ passport.use(new SpotifyStrategy(
 )
 );
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://127.0.0.1/spotify_users', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':' + databasePassword + '@ds351455.mlab.com:51455/heroku_rxx45s68', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
+    .catch((err) => {
+        res.json(err)
+    })
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
