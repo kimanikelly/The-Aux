@@ -76,12 +76,6 @@ passport.deserializeUser(function (user, done) {
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
 
-// // Database connection for development
-// mongoose.connect('mongodb://localhost/spotify_users', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// });
-
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
@@ -141,16 +135,20 @@ passport.use(new SpotifyStrategy(
     }
 )
 );
-
-// Database connection for production
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd' || 'mongodb://localhost/spotify_users', {
+// Database connection for development
+mongoose.connect('mongodb://localhost/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-})
-    .catch((err) => {
-        console.log(err);
-    })
+});
+// Database connection for production
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+//     + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd' || 'mongodb://localhost/spotify_users', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
+//     .catch((err) => {
+//         console.log(err);
+//     })
 
 // // // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
@@ -166,7 +164,7 @@ app.get("*", (req, res) => {
     if (process.env.NODE_ENV === "production") {
         res.sendFile(path.join(__dirname + "/client/build/index.html"));
     } else {
-      res.json('Failed')
+        res.json('Failed')
     }
 });
 
