@@ -34,7 +34,7 @@ module.exports = function (app) {
 
     // Redirects the user back to the app on successful authorization
     app.get(
-        '/auth/spotify/callback',
+        'http://localhost:3001/auth/spotify/callback',
 
         passport.authenticate('spotify', {
 
