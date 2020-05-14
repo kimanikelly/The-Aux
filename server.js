@@ -76,15 +76,6 @@ passport.deserializeUser(function (user, done) {
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd' || 'mongodb://localhost/spotify_users', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .catch((err) => {
-        console.log(err);
-    })
-
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
@@ -162,6 +153,21 @@ app.get("*", (req, res) => {
         console.log("Home page failed to render")
     }
 });
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .catch((err) => {
+        console.log(err);
+    })
+
+mongoose.connect('mongodb://localhost/spotify_users', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+
 
 // Starts the express server
 app.listen(PORT, function () {
