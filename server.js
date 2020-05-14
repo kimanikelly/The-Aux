@@ -141,7 +141,7 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':' + 
     useUnifiedTopology: true
 })
     .catch((err) => {
-        res.json(err)
+        console.log(err)
     })
 
 // Serve up static assets (usually on heroku)
