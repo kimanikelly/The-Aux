@@ -157,15 +157,13 @@ if (process.env.NODE_ENV === "production") {
 
 app.get("*", function (req, res) {
     if (process.env.NODE_ENV === "production") {
-        res.sendFile(path.join(__dirname, "./client/build"));
+        res.sendFile(path.join(__dirname, "./client/build/index.html"));
     }
     else {
         // reminder
         res.json({ "message": "Go to http://localhost:3001" });
     }
 });
-
-require('./client/build/')
 
 // Starts the express server
 app.listen(PORT, function () {
