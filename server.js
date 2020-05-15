@@ -142,14 +142,14 @@ mongoose.connect('mongodb://localhost/spotify_users', {
 });
 
 // Database connection for production
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-//     + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd' || 'mongodb://localhost/spotify_users', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
-//     .catch((err) => {
-//         console.log(err);
-//     })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .catch((err) => {
+        console.log(err);
+    })
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
