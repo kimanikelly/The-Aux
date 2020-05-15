@@ -27,7 +27,7 @@ class Login extends React.Component {
                     <h1 className='the-aux'>The-Aux</h1>
                 </nav>
 
-                <a href='https://the-aux.herokuapp.com/'>
+                <a href='https://the-aux.herokuapp.com/auth/spotify'>
                     <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'>
                         <span>Login With Spotify</span>
                     </button>
