@@ -130,7 +130,7 @@ passport.use(new SpotifyStrategy(
 );
 
 // Database connection for development
-mongoose.connect('mongodb://localhost/spotify_users', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
