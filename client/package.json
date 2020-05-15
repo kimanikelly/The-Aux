@@ -20,13 +20,13 @@
     "spotify-web-api-node": "^4.0.0",
     "use-spotify-web-playback-sdk": "^0.2.2"
   },
-  "proxy": "http://localhost:3000",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3000",
   "eslintConfig": {
     "extends": "react-app"
   },
