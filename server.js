@@ -78,7 +78,7 @@ require('./routes/api-routes')(app);
 
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
-    
+
     {
         // The clientID property given the value of the clientId variable(Stores the Spotify CLIENT_ID)
         // The CLIENT_ID was created when the app was registered with Spotify
@@ -127,20 +127,20 @@ passport.use(new SpotifyStrategy(
 
             });
     }
-)
-);
+),
+    // Database connection for development
+    mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/spotify_users', {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+        .then(() => {
+            console.log('Database connected for development')
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 
-// Database connection for development
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/spotify_users', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => {
-        console.log('Database connected for development')
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+);
 
 // Database connection for production
 // mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
