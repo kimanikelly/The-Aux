@@ -23,7 +23,7 @@ class App extends Component {
           </div>
         )} />
 
-        <Route exact={true} path='https://the-aux.herokuapp.com/home' render={() => (
+        <Route exact={true} path='/home' render={() => (
           <div className='App'>
             <Home />
           </div>
