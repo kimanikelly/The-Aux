@@ -75,6 +75,8 @@ passport.deserializeUser(function (user, done) {
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
+
+console.log(redirectUri)
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
