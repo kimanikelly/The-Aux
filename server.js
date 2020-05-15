@@ -75,7 +75,17 @@ passport.deserializeUser(function (user, done) {
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
-
+// Database connection for development
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/spotify_users', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => {
+        console.log('Database connected for development')
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
 
@@ -128,17 +138,6 @@ passport.use(new SpotifyStrategy(
             });
     }
 ),
-    // Database connection for development
-    mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/spotify_users', {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    })
-        .then(() => {
-            console.log('Database connected for development')
-        })
-        .catch((err) => {
-            console.log(err);
-        })
 
 );
 
