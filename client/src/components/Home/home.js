@@ -27,7 +27,7 @@ var spotifyApi = new Spotify();
 
 // Imports the image and stores the value
 var spotifyImage = require('../../images/spotify-image.png');
-
+var key;
 // ES6 class to define the Home component
 class Home extends React.Component {
     constructor(props) {
@@ -51,13 +51,10 @@ class Home extends React.Component {
             .then(async (res) => {
 
                 // Sets the Spotify access token
-                spotifyApi.setAccessToken(res.data.Token);
+                await spotifyApi.setAccessToken(res.data.Token);
 
                 // Stores the token in localStorage
                 sessionStorage.setItem('key', res.data.Token);
-
-                // Sets accessToken variable the value of Token returned from the GET request
-                await sessionStorage.getItem('key', res.data.Token);
 
                 // Sets the displayName state to the logged in users Spotify display name from response(res)
                 // Sets the email state to the logged in users Spotify email from response(res)

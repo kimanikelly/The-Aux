@@ -13,7 +13,7 @@ module.exports = function (app) {
     app.use(cors())
 
     // Initiates Oauth transaction and redirects the user to Spotify
-    app.get('/login', passport.authenticate('spotify', {
+    app.get('/auth/spotify', passport.authenticate('spotify', {
 
         // Scopes provide Spotify users using third-party apps the confidence that only the
         // information they choose to share will be shared, and nothing more
@@ -45,7 +45,7 @@ module.exports = function (app) {
         (req, res) => {
 
             // Successful authentication, redirect home.
-            res.redirect('https://localhost:3001/home');
+            res.redirect('http://localhost:3001/home');
         }
     );
 
@@ -75,7 +75,6 @@ module.exports = function (app) {
                 DisplayName: recentUserDisplayName,
                 Email: recentUserEmail
             });
-
         });
     });
 

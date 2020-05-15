@@ -43,6 +43,7 @@ var databaseUser = credentials.credentials.mongoDatabaseUser;
 // Stores the MongoLab database password
 var databasePassword = credentials.credentials.mongoDatabasePassword;
 
+// Stores the MongoLab database connection string
 var databaseUri = credentials.credentials.mongoDatabaseUri;
 
 // Loads the express module as a dependency
@@ -71,11 +72,9 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
     done(null, user);
 });
-
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
-
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
     {
@@ -91,7 +90,6 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-
         SpotifyUserModel.findOne(
             {
                 spotifyId: profile.id,
@@ -122,41 +120,45 @@ passport.use(new SpotifyStrategy(
                     };
 
                 });
-
+                console.log(user)
                 return done(err, user);
 
             });
-
-        app.get('/token', function (req, res) {
-            res.send({
-                token: accessToken
-            });
-        });
     }
 )
 );
+
 // Database connection for development
 mongoose.connect('mongodb://localhost/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
-});
-
-// Database connection for production
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
 })
+    .then(() => {
+        console.log('Database connected for development')
+    })
     .catch((err) => {
         console.log(err);
     })
+
+// Database connection for production
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+//     + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
+//     .then(() => {
+//         console.log('Database connected for production')
+//     })
+//     .catch((err) => {
+//         console.log(err);
+//     })
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
     app.use(express.static('client/build'))
 
     app.get('*', (req, res) => {
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html')) // relative path
+        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
     })
 }
 
