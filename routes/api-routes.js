@@ -45,7 +45,7 @@ module.exports = function (app) {
         (req, res) => {
 
             // Successful authentication, redirect home.
-            res.redirect('http://localhost:3001/home');
+            res.redirect('https://the-aux.herokuapp.com/home');
         }
     );
 
