@@ -48,10 +48,10 @@ class Home extends React.Component {
 
             // The .then() promise will return the Spotify user data object as the response(res)
             // ES6 arrow function used to perform the promise
-            .then(async (res) => {
+            .then((res) => {
 
                 // Sets the Spotify access token
-                await spotifyApi.setAccessToken(res.data.Token);
+                spotifyApi.setAccessToken(res.data.Token);
 
                 // Stores the token in localStorage
                 sessionStorage.setItem('key', res.data.Token);
