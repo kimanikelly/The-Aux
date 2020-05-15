@@ -78,6 +78,7 @@ require('./routes/api-routes')(app);
 
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
+    
     {
         // The clientID property given the value of the clientId variable(Stores the Spotify CLIENT_ID)
         // The CLIENT_ID was created when the app was registered with Spotify
@@ -99,7 +100,7 @@ passport.use(new SpotifyStrategy(
 
             // This function is executed after successful user authorization
             // The user parameter is stores the 
-            function (err, user) {
+            async function (err, user) {
                 if (err) {
                     console.log(err);
                 };
@@ -115,7 +116,7 @@ passport.use(new SpotifyStrategy(
                 });
 
                 // Adds the new user signed in to the database
-                newSpotifyUser.save(function (err) {
+                await newSpotifyUser.save(function (err) {
                     if (err) {
                         console.log(err);
                     };
