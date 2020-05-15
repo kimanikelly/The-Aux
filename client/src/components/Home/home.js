@@ -56,6 +56,8 @@ class Home extends React.Component {
                 // Stores the token in localStorage
                 sessionStorage.setItem('key', res.data.Token);
 
+                console.log(sessionStorage.getItem('key'));
+
                 // Sets the displayName state to the logged in users Spotify display name from response(res)
                 // Sets the email state to the logged in users Spotify email from response(res)
                 this.setState({
