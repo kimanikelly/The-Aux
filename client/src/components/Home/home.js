@@ -27,7 +27,7 @@ var spotifyApi = new Spotify();
 
 // Imports the image and stores the value
 var spotifyImage = require('../../images/spotify-image.png');
-var key;
+
 // ES6 class to define the Home component
 class Home extends React.Component {
     constructor(props) {
@@ -36,6 +36,7 @@ class Home extends React.Component {
         this.state = {
             displayName: '',
             email: '',
+            token: ''
         };
     };
 
@@ -43,26 +44,22 @@ class Home extends React.Component {
     // // The API path 'users' will return the logged in users Spotify display name and email address
     componentDidMount() {
 
-        // Axios GET request 'users' API path
+        // Axios GET request 'users' API path in production
         axios.post('https://the-aux.herokuapp.com/users')
+
+            // Axios GET request 'users' API path in development
+            // axios.post('http://localhost:3000/users')
 
             // The .then() promise will return the Spotify user data object as the response(res)
             // ES6 arrow function used to perform the promise
             .then(async (res) => {
 
-                // Sets the Spotify access token
-                await spotifyApi.setAccessToken(res.data.Token);
-
-                // Stores the token in localStorage
-                sessionStorage.setItem('key', res.data.Token);
-
-                console.log(sessionStorage.getItem('key'));
-
                 // Sets the displayName state to the logged in users Spotify display name from response(res)
                 // Sets the email state to the logged in users Spotify email from response(res)
                 this.setState({
                     displayName: res.data.DisplayName,
-                    email: res.data.Email
+                    email: res.data.Email,
+                    token: res.data.Token
                 });
             })
             // If an error occurs during the GET request to the 'users' API it will be caught and logged to the console
@@ -104,7 +101,7 @@ class Home extends React.Component {
                         play='true'
                         magnifySliderOnHover='true'
                         autoPlay='true'
-                        token={sessionStorage.getItem('key')}
+                        token={this.state.token}
                     />
                 </div>
 

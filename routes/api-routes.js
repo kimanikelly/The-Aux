@@ -33,8 +33,7 @@ module.exports = function (app) {
     });
 
     // Redirects the user back to the app on successful authorization
-    app.get(
-        '/auth/spotify/callback',
+    app.get('/auth/spotify/callback',
 
         passport.authenticate('spotify', {
 
@@ -44,11 +43,15 @@ module.exports = function (app) {
 
         (req, res) => {
 
-            // Successful authentication, redirect home.
+            // Successful authentication, redirect home in production
             res.redirect('https://the-aux.herokuapp.com/home');
+
+            // Successful authentication, redirect home in development
+            //  res.redirect('http://localhost:3001/home');
         }
     );
 
+    // Post route used to get the information of the recently signed in user
     app.post('/users', function (req, res) {
 
         SpotifyUserModel.find(function (err, spotifyUsers) {

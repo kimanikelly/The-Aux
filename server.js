@@ -72,20 +72,11 @@ passport.serializeUser(function (user, done) {
 passport.deserializeUser(function (user, done) {
     done(null, user);
 });
+
 // Loads the api-routes to server.js
 // Allows for custom API building with Express
 require('./routes/api-routes')(app);
-// Database connection for development
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/spotify_users', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => {
-        console.log('Database connected for development')
-    })
-    .catch((err) => {
-        console.log(err);
-    })
+
 // Spotify authentication strategy authenticates users using a Spotify account and OAuth 2.0 tokens
 passport.use(new SpotifyStrategy(
 
@@ -110,7 +101,7 @@ passport.use(new SpotifyStrategy(
 
             // This function is executed after successful user authorization
             // The user parameter is stores the 
-            async function (err, user) {
+            function (err, user) {
                 if (err) {
                     console.log(err);
                 };
@@ -126,7 +117,7 @@ passport.use(new SpotifyStrategy(
                 });
 
                 // Adds the new user signed in to the database
-                await newSpotifyUser.save(function (err) {
+                newSpotifyUser.save(function (err) {
                     if (err) {
                         console.log(err);
                     };
@@ -137,22 +128,26 @@ passport.use(new SpotifyStrategy(
 
             });
     }
-),
+));
 
-);
-
-// Database connection for production
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-//     + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+// Database connection for development
+// mongoose.connect('mongodb://localhost:27017/spotify_users', {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // })
-//     .then(() => {
-//         console.log('Database connected for production')
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     })
+
+// Database connection for production
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+    .then(() => {
+        console.log('Database connected for production')
+    })
+    .catch((err) => {
+        console.log(err);
+    })
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
