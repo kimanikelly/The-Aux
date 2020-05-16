@@ -28,18 +28,18 @@ class Login extends React.Component {
                 </nav>
 
                 {/* Production route */}
-                <a href='https://the-aux.herokuapp.com/auth/spotify'>
-                    <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'>
-                        <span>Login With Spotify</span>
-                    </button>
-                </a>
-
-                {/* Development route */}
-                {/* <a href='http://localhost:3000/auth/spotify'>
+                {/* <a href='https://the-aux.herokuapp.com/auth/spotify'>
                     <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'>
                         <span>Login With Spotify</span>
                     </button>
                 </a> */}
+
+                {/* Development route */}
+                <a href='http://localhost:3000/auth/spotify'>
+                    <button type="button" className="btn btn-secondary btn-lg" id='log-in-button'>
+                        <span>Login With Spotify</span>
+                    </button>
+                </a>
 
                 <nav className="navbar fixed-bottom navbar-light bg-light">
                     <h3 className='copyright'>Copyright &copy; 2020</h3>

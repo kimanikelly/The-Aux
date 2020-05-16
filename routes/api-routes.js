@@ -44,7 +44,7 @@ module.exports = function (app) {
         (req, res) => {
 
             // Successful authentication, redirect home in production
-            res.redirect('https://the-aux.herokuapp.com/home');
+            res.redirect('http://localhost:3001/home');
 
             // Successful authentication, redirect home in development
             //  res.redirect('http://localhost:3001/home');
@@ -74,6 +74,7 @@ module.exports = function (app) {
 
             var refreshToken = recentUser[0]['refreshToken']
             console.log(refreshToken)
+            console.log(recentUserToken)
 
             // The response returns a JSON object storing the following credentials
             res.send({
