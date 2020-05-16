@@ -36,3 +36,7 @@ span {
     background-color:gray;
     border-color:rgb(11, 194, 90);
 }
+
+a:hover {
+    text-decoration: none;
+}

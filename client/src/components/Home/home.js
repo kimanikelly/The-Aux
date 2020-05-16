@@ -77,23 +77,38 @@ class Home extends React.Component {
                     <title>{pageTitle}</title>
                 </Helmet>
 
+                {/* The-Aux heading */}
                 <nav className="navbar navbar-light bg-light">
                     <h1 className='the-aux'>The-Aux</h1>
                 </nav>
 
+                {/* Display name */}
                 <div id='display-name'>
+                    {/* Given the value of the displayName state */}
                     <h1>Spotify Display Name: {this.state.displayName}</h1>
                 </div>
 
+                {/* Email */}
                 <div id='email'>
+                    {/* Given the value of the email state */}
                     <h1>Spotify Email: {this.state.email}</h1>
                 </div>
 
+                {/* Log out buton */}
+                <div id='log-out-div'>
+                    {/* Routes back to the home page */}
+                    <a href='/'>
+                        <button type="button" className="btn btn-secondary btn-lg" id='log-out-button'>
+                            <span>Log Out</span>
+                        </button>
+                    </a>
+                </div>
+                {/* 
                 <div id='image-div'>
                     <a href='https://open.spotify.com/' target='_blank' rel='noopener noreferrer'>
                         <img src={spotifyImage} alt='Spotify logo' />
                     </a>
-                </div>
+                </div> */}
 
                 <div id='player'>
                     <SpotifyPlayer
