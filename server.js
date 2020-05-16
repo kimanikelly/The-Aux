@@ -93,6 +93,7 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
+      
         SpotifyUserModel.findOne(
             {
                 spotifyId: profile.id,
@@ -113,7 +114,11 @@ passport.use(new SpotifyStrategy(
                     spotifyProfileId: profile.id,
                     spotifyUserName: profile.username,
                     email: profile._json.email,
-                    token: accessToken
+                    token: accessToken,
+                    refreshToken:refreshToken,
+                    expiresIn:expires_in
+
+
                 });
 
                 // Adds the new user signed in to the database
@@ -123,7 +128,7 @@ passport.use(new SpotifyStrategy(
                     };
 
                 });
-                console.log(user)
+              
                 return done(err, user);
 
             });

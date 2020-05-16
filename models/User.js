@@ -27,6 +27,13 @@ var UserSchema = new Schema({
     token: {
         type: String,
         required: true
+    },
+    refreshToken: {
+        type:String,
+        required:true
+    },
+    expiresIn : {
+        type:String
     }
 });
 
