@@ -13,7 +13,7 @@ h1 {
 }
 
 #player {
-    margin-top:206px;
+    margin-top:215px;
 }
 
 #display-name {
@@ -68,15 +68,6 @@ h1 {
     border-bottom:none;
 }
 
-.copyright {
-    color:whitesmoke;
-    text-transform: uppercase;
-    font-weight: bold;
-    margin-left:41%;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
- 
-}
-
 a:hover {
     text-decoration: none;
 }
@@ -86,3 +77,143 @@ a:hover {
     border-color:rgb(11, 194, 90);
 }
 
+
+/* Iphone 5 portrait mode  */
+@media only screen and (min-width : 320px) and (max-width:568px) and (orientation : portrait) {
+    .user-info-h1 {
+        font-size: 20px;
+    }
+
+    #display-name {
+        width:296px;
+        margin-top:10%;
+        margin-left:4%;
+        margin-bottom:5%;
+
+    }
+
+    #email {
+        width:296px;
+        margin-left:4%;
+
+    }
+
+    #log-out-button {
+        font-size:18px;
+        margin-top:8%;
+        width:100px;
+    }
+
+    #player {
+        margin-top:164px;
+    }
+}
+/* Iphone 5 portrait mode  */
+
+/* Iphone 5 landscape mode */
+@media only screen and (min-width : 320px) and (max-width:568px) and (orientation : landscape) {
+
+    .user-info-h1{
+        font-size:18px;
+    }
+
+    #display-name {  
+        box-shadow:2px 4px black;
+        width:80%;
+        margin:auto;
+        margin-top:6px;
+        margin-bottom:15px;
+    }
+
+    #email {
+        box-shadow:2px 4px black;
+        width:90%;
+        margin:auto;
+        margin-bottom:2px; 
+    }
+
+    #log-out-button {
+        font-size:12px;
+        margin-bottom:21px;
+        width:100px;
+   
+    }
+
+    #player {
+        margin-top:0px;
+    }
+
+    .copyright{
+        font-size:20px;
+    }
+}
+/* Iphone 5 landscape mode */
+
+/* Iphone 6,7,8 portrait mode */
+@media only screen and (min-width: 375px) and (max-width : 667px) and (orientation : portrait ) {   
+
+    #display-name {
+        margin-left:11%;
+    }
+
+    #email {
+        margin-left:11%;
+    }
+
+    #player{
+        margin-top:251px;
+    }
+}
+/* Iphone 6,7,8 portrait mode */
+
+/* Iphone 6/7/8 plus landscape mode */
+@media only screen and (min-width:414px) and (max-width:736px) and (orientation : landscape) {
+
+    .user-info-h1{
+        font-size:22px;
+    }
+
+    #email {
+        margin-bottom:4% !important;
+    }
+
+    #log-out-button {
+        font-size:14px;
+    }
+
+    #player {
+        margin-top:75px;
+    }
+
+    .copyright {
+        font-size:20px;
+    }
+}
+/* Iphone 6/7/8 plus landscape mode */
+
+/* Iphone 6/7/8 plus portrait mode */
+@media only screen and (min-width:414px) and (max-width:736px) and (orientation : portrait) {
+
+    #display-name {
+        margin-left:60px;
+    }
+
+    #email {
+        margin-left:60px;
+    }
+
+    #player {
+        margin-top:311px;
+    }
+}
+/* Iphone 6/7/8 plus portrait mode */
+
+
+/* Iphone X portrait mode */
+@media only screen and (min-width: 375px) and (max-width:812px) and (orientation : portrait) {
+    
+    #player {
+        margin-top:396px;
+    }
+
+}

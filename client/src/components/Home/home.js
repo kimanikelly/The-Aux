@@ -85,13 +85,13 @@ class Home extends React.Component {
                 {/* Display name */}
                 <div id='display-name'>
                     {/* Given the value of the displayName state */}
-                    <h1>Spotify Display Name: {this.state.displayName}</h1>
+                    <h1 className='user-info-h1'>Spotify Display Name: {this.state.displayName}</h1>
                 </div>
 
                 {/* Email */}
                 <div id='email'>
                     {/* Given the value of the email state */}
-                    <h1>Spotify Email: {this.state.email}</h1>
+                    <h1 className='user-info-h1'>Spotify Email: {this.state.email}</h1>
                 </div>
 
                 {/* Log out buton */}
