@@ -44,7 +44,7 @@ module.exports = function (app) {
         (req, res) => {
 
             // Successful authentication, redirect home in production
-            res.redirect('http://localhost:3001/home');
+            res.redirect('https://the-aux.herokuapp.com/home');
 
             // Successful authentication, redirect home in development
             //  res.redirect('http://localhost:3001/home');

@@ -93,7 +93,7 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-      
+
         SpotifyUserModel.findOne(
             {
                 spotifyId: profile.id,
@@ -115,8 +115,8 @@ passport.use(new SpotifyStrategy(
                     spotifyUserName: profile.username,
                     email: profile._json.email,
                     token: accessToken,
-                    refreshToken:refreshToken,
-                    expiresIn:expires_in
+                    refreshToken: refreshToken,
+                    expiresIn: expires_in
 
 
                 });
@@ -128,7 +128,7 @@ passport.use(new SpotifyStrategy(
                     };
 
                 });
-              
+
                 return done(err, user);
 
             });
@@ -136,23 +136,17 @@ passport.use(new SpotifyStrategy(
 ));
 
 // Database connection for development
-mongoose.connect('mongodb://localhost:27017/spotify_users', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-
-// Database connection for production
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-//     + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+// mongoose.connect('mongodb://localhost:27017/spotify_users', {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // })
-//     .then(() => {
-//         console.log('Database connected for production')
-//     })
-//     .catch((err) => {
-//         console.log(err);
-//     })
+
+// Database connection for production
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
