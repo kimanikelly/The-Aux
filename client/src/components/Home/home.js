@@ -47,8 +47,8 @@ class Home extends React.Component {
         // Axios GET request 'users' API path in production
         // axios.post('https://the-aux.herokuapp.com/users')
 
-            // Axios GET request 'users' API path in development
-            axios.post('http://localhost:3000/users')
+        // Axios GET request 'users' API path in development
+        axios.post('http://localhost:3000/users')
 
             // The .then() promise will return the Spotify user data object as the response(res)
             // ES6 arrow function used to perform the promise

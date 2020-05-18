@@ -114,33 +114,31 @@ a:hover {
 @media only screen and (min-width : 320px) and (max-width:568px) and (orientation : landscape) {
 
     .user-info-h1{
-        font-size:18px;
+        font-size:20px !important;
     }
 
     #display-name {  
         box-shadow:2px 4px black;
-        width:80%;
-        margin:auto;
-        margin-top:6px;
-        margin-bottom:15px;
+        width:450px !important;
+        margin-left:52px !important;
+        margin-top:8px !important;
     }
 
     #email {
         box-shadow:2px 4px black;
-        width:90%;
-        margin:auto;
-        margin-bottom:2px; 
+        width:450px !important;
+        margin-left:52px !important;
+        margin-bottom:10% !important; 
     }
 
     #log-out-button {
-        font-size:12px;
-        margin-bottom:21px;
+        font-size:12px !important;
+        margin-bottom:0%!important;
         width:100px;
-   
     }
 
     #player {
-        margin-top:0px;
+      margin-bottom:43px;
     }
 
     .copyright{
@@ -150,31 +148,48 @@ a:hover {
 /* Iphone 5 landscape mode */
 
 /* Iphone 6,7,8 portrait mode */
-@media only screen and (min-width: 375px) and (max-width : 667px) and (orientation : portrait ) {   
+@media only screen and (min-width: 375px) and (max-width : 667px) and (orientation : portrait ) {
 
     #display-name {
-        margin-left:11%;
-    }
+        margin-left:36px;
+
+    } 
 
     #email {
-        margin-left:11%;
+        margin-left:36px;
     }
 
-    #player{
-        margin-top:251px;
+    #player {
+        margin-bottom:43px !important;
     }
 }
-/* Iphone 6,7,8 portrait mode */
+
+/* Iphone 6,7,8 landscape mode */
+@media only screen and (min-width: 375px) and (max-width : 667px) and (orientation : landscape ) {
+
+    #player  {
+        margin-top:42px !important;
+    }
+}
 
 /* Iphone 6/7/8 plus landscape mode */
 @media only screen and (min-width:414px) and (max-width:736px) and (orientation : landscape) {
 
+    #display-name {
+        margin:auto !important;
+        margin-bottom:18px !important;
+        margin-top:6px !important;
+        width:426px !important;
+    }
+
     .user-info-h1{
-        font-size:22px;
+        font-size:20px !important;
     }
 
     #email {
-        margin-bottom:4% !important;
+        margin:auto !important;
+        margin-bottom:5% !important;
+        width:426px !important;
     }
 
     #log-out-button {
@@ -182,7 +197,7 @@ a:hover {
     }
 
     #player {
-        margin-top:75px;
+        margin-bottom:-60px !important;
     }
 
     .copyright {
@@ -195,15 +210,19 @@ a:hover {
 @media only screen and (min-width:414px) and (max-width:736px) and (orientation : portrait) {
 
     #display-name {
-        margin-left:60px;
+        margin-left:54px;
     }
 
     #email {
-        margin-left:60px;
+        margin-left:54px;
+    }
+
+    #log-out {
+        margin-bottom:0px;
     }
 
     #player {
-        margin-top:311px;
+        margin-top:200px !important;
     }
 }
 /* Iphone 6/7/8 plus portrait mode */
@@ -213,7 +232,36 @@ a:hover {
 @media only screen and (min-width: 375px) and (max-width:812px) and (orientation : portrait) {
     
     #player {
-        margin-top:396px;
+        margin-top:396px !important;
+    }
+}
+/* Iphone X portrait mode */
+
+/* Iphone X landscape mode */
+@media only screen and (min-width: 375px) and (max-width:812px) and (orientation : landscape) {
+    
+    .user-info-h1 {
+        font-size:30px;
     }
 
+    #display-name {
+        width:680px;
+        margin-top:10px;
+        margin-left:7%;
+    }
+
+    #email  {
+        width:680px;
+        margin-left:7%;
+    }
+
+    #log-out-button {
+        font-size:15px;
+        margin-bottom:1px;
+    }
+
+    #player {
+        margin-top:23px;
+    }
 }
+/* Iphone X landscape mode */
