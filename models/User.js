@@ -28,13 +28,6 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
-    refreshToken: {
-        type:String,
-        required:true
-    },
-    expiresIn : {
-        type:String
-    }
 });
 
 // Converts the userSchema into a model

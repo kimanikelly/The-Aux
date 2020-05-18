@@ -71,11 +71,7 @@ module.exports = function (app) {
 
             // The recentUserEmail variabke stores the recent users email
             var recentUserEmail = recentUser[0]['email'];
-
-            var refreshToken = recentUser[0]['refreshToken']
-            console.log(refreshToken)
-            console.log(recentUserToken)
-
+        
             // The response returns a JSON object storing the following credentials
             res.send({
                 Token: recentUserToken,
