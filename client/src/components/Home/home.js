@@ -42,18 +42,18 @@ class Home extends React.Component {
 
     // // The componentDidMount function will intitiate the Axios GET request once the Home component is rendered
     // // The API path 'users' will return the logged in users Spotify display name and email address
-    componentDidMount() {
+     async componentDidMount() {
 
         // Axios GET request 'users' API path in production
-        axios.post('https://the-aux.herokuapp.com/users')
+        // axios.post('https://the-aux.herokuapp.com/users')
 
         // Axios GET request 'users' API path in development
-        // axios.post('http://localhost:3000/users')
+         await axios.post('http://localhost:3000/users')
 
             // The .then() promise will return the Spotify user data object as the response(res)
             // ES6 arrow function used to perform the promise
-            .then(async (res) => {
-
+            .then((res) => {
+                console.log(res)
                 // Sets the displayName state to the logged in users Spotify display name from response(res)
                 // Sets the email state to the logged in users Spotify email from response(res)
                 this.setState({

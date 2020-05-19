@@ -37,17 +37,17 @@ module.exports = function (app) {
 
         passport.authenticate('spotify', {
 
-            failureRedirect: '/',
+            failureRedirect: 'http://localhost:3001',
 
         }),
 
         (req, res) => {
 
             // Successful authentication, redirect home in production
-            res.redirect('https://the-aux.herokuapp.com/home');
+            // res.redirect('https://the-aux.herokuapp.com/home');
 
             // Successful authentication, redirect home in development
-            //  res.redirect('http://localhost:3001/home');
+             res.redirect('http://localhost:3001/home');
         }
     );
 
@@ -71,13 +71,20 @@ module.exports = function (app) {
 
             // The recentUserEmail variabke stores the recent users email
             var recentUserEmail = recentUser[0]['email'];
+
+            var refresh = recentUser[0]['refresh'];
+
+            var expired = recentUser[0]['expire'];
         
             // The response returns a JSON object storing the following credentials
             res.send({
                 Token: recentUserToken,
                 DisplayName: recentUserDisplayName,
-                Email: recentUserEmail
+                Email: recentUserEmail,
+                test:refresh,
+                Expire:expired
             });
+         
         });
     });
 

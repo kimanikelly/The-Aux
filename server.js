@@ -52,6 +52,8 @@ var express = require('express');
 // Tells node that an express server is being created
 var app = express();
 
+var axios = require('axios');
+
 // Sets the port the express server will be running on
 var PORT = process.env.PORT || 3000;
 
@@ -93,12 +95,14 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-
+        console.log(profile)
         SpotifyUserModel.findOne(
             {
-                spotifyId: profile.id,
+                // spotifyId: profile.id,
 
             },
+           
+            
 
             // This function is executed after successful user authorization
             // The user parameter is stores the 
@@ -115,11 +119,10 @@ passport.use(new SpotifyStrategy(
                     spotifyUserName: profile.username,
                     email: profile._json.email,
                     token: accessToken,
-                    refreshToken: refreshToken,
-                    expiresIn: expires_in
-
-
+                    refresh: refreshToken,
+                    expire:expires_in
                 });
+               
 
                 // Adds the new user signed in to the database
                 newSpotifyUser.save(function (err) {
@@ -136,17 +139,18 @@ passport.use(new SpotifyStrategy(
 ));
 
 // Database connection for development
-// mongoose.connect('mongodb://localhost:27017/spotify_users', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
-
-// Database connection for production
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+mongoose.connect('mongodb://localhost/spotify_users', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
+
+
+// Database connection for production
+// mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+//     + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
