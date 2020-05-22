@@ -25,9 +25,6 @@ var Spotify = require('spotify-web-api-js');
 // Initializes the Spotify Web API
 var spotifyApi = new Spotify();
 
-// Imports the image and stores the value
-var spotifyImage = require('../../images/spotify-image.png');
-
 // ES6 class to define the Home component
 class Home extends React.Component {
     constructor(props) {
@@ -36,31 +33,34 @@ class Home extends React.Component {
         this.state = {
             displayName: '',
             email: '',
-            token: ''
+            token: '',
         };
     };
 
     // // The componentDidMount function will intitiate the Axios GET request once the Home component is rendered
     // // The API path 'users' will return the logged in users Spotify display name and email address
-     async componentDidMount() {
+    async componentDidMount() {
 
         // Axios GET request 'users' API path in production
-        // axios.post('https://the-aux.herokuapp.com/users')
+        await axios.post('https://the-aux.herokuapp.com/users')
 
         // Axios GET request 'users' API path in development
-         await axios.post('http://localhost:3000/users')
+        // await axios.post('http://localhost:3000/users')
 
             // The .then() promise will return the Spotify user data object as the response(res)
             // ES6 arrow function used to perform the promise
             .then((res) => {
-                console.log(res)
+
                 // Sets the displayName state to the logged in users Spotify display name from response(res)
                 // Sets the email state to the logged in users Spotify email from response(res)
                 this.setState({
                     displayName: res.data.DisplayName,
                     email: res.data.Email,
-                    token: res.data.Token
+                    token: res.data.Token,
                 });
+
+                sessionStorage.setItem('accessToken', res.data.Token);
+                sessionStorage.setItem('displayName', res.data.DisplayName);
             })
             // If an error occurs during the GET request to the 'users' API it will be caught and logged to the console
             .catch(function (err) {
@@ -82,11 +82,12 @@ class Home extends React.Component {
                     <h1 className='the-aux'>The-Aux</h1>
                 </nav>
 
-                {/* Display name */}
+
                 <div id='display-name'>
                     {/* Given the value of the displayName state */}
                     <h1 className='user-info-h1'>Spotify Display Name: {this.state.displayName}</h1>
                 </div>
+
 
                 {/* Email */}
                 <div id='email'>
@@ -94,21 +95,11 @@ class Home extends React.Component {
                     <h1 className='user-info-h1'>Spotify Email: {this.state.email}</h1>
                 </div>
 
-                {/* Log out buton */}
-                <div id='log-out-div'>
-                    {/* Routes back to the home page */}
-                    <a href='/'>
-                        <button type="button" className="btn btn-secondary btn-lg" id='log-out-button'>
-                            <span>Log Out</span>
-                        </button>
-                    </a>
-                </div>
-                {/* 
-                <div id='image-div'>
-                    <a href='https://open.spotify.com/' target='_blank' rel='noopener noreferrer'>
-                        <img src={spotifyImage} alt='Spotify logo' />
-                    </a>
-                </div> */}
+                <a href='/'>
+                    <button id='log-out-button'>
+                        Log out
+                    </button>
+                </a>
 
                 <div id='player'>
                     <SpotifyPlayer
@@ -116,7 +107,7 @@ class Home extends React.Component {
                         play='true'
                         magnifySliderOnHover='true'
                         autoPlay='true'
-                        token={this.state.token}
+                        token={sessionStorage.getItem('accessToken')}
                     />
                 </div>
 
@@ -127,6 +118,7 @@ class Home extends React.Component {
         )
     }
 };
+
 
 // Exports the Home component
 export default Home;

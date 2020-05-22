@@ -25,7 +25,8 @@ module.exports = function (app) {
             'streaming',
             'user-modify-playback-state',
             'user-library-read',
-
+            'playlist-modify-public',
+            'playlist-modify-private',
             'user-library-modify']
         , showDialog: true
 
@@ -37,17 +38,17 @@ module.exports = function (app) {
 
         passport.authenticate('spotify', {
 
-            failureRedirect: 'http://localhost:3001',
+            failureRedirect: '/',
 
         }),
 
         (req, res) => {
 
             // Successful authentication, redirect home in production
-            // res.redirect('https://the-aux.herokuapp.com/home');
+            res.redirect('https://the-aux.herokuapp.com/home');
 
             // Successful authentication, redirect home in development
-             res.redirect('http://localhost:3001/home');
+            // res.redirect('http://localhost:3001/home');
         }
     );
 
@@ -58,7 +59,7 @@ module.exports = function (app) {
             if (err) {
                 console.log(err)
             };
-         
+
             // SpotifyUsers returns an array of objects storing all users and their credentials
             // The recentUser variable stores the recent user logged in of the SpotifyUsers array
             var recentUser = spotifyUsers.slice(-1);
@@ -75,16 +76,16 @@ module.exports = function (app) {
             var refresh = recentUser[0]['refresh'];
 
             var expired = recentUser[0]['expire'];
-        
+
             // The response returns a JSON object storing the following credentials
             res.send({
                 Token: recentUserToken,
                 DisplayName: recentUserDisplayName,
                 Email: recentUserEmail,
-                test:refresh,
-                Expire:expired
+                test: refresh,
+                Expire: expired
             });
-         
+
         });
     });
 

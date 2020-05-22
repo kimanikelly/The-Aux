@@ -13,7 +13,8 @@ h1 {
 }
 
 #player {
-    margin-top:215px;
+    margin-top:230px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 #display-name {
@@ -49,19 +50,6 @@ h1 {
     border:4px solid grey;
     border-radius:32px;
 }
-
-/* #image-div {
-    margin-top:10px;
-} */
-
-/* img {
-    width:50px;
-    height:50px;
-} */
-
-/* img:hover {
-    opacity:.5;
-} */
 
 .fixed-bottom {
     border-top:3px solid rgb(11, 194, 90);
@@ -105,7 +93,7 @@ a:hover {
     }
 
     #player {
-        margin-top:164px;
+        margin-top:175px;
     }
 }
 /* Iphone 5 portrait mode  */
@@ -114,31 +102,25 @@ a:hover {
 @media only screen and (min-width : 320px) and (max-width:568px) and (orientation : landscape) {
 
     .user-info-h1{
-        font-size:20px !important;
+        font-size:20px ;
     }
 
     #display-name {  
         box-shadow:2px 4px black;
-        width:450px !important;
-        margin-left:52px !important;
-        margin-top:8px !important;
+        width:450px ;
+        margin-left:52px ;
+        margin-top:8px ;
     }
 
     #email {
         box-shadow:2px 4px black;
-        width:450px !important;
-        margin-left:52px !important;
-        margin-bottom:10% !important; 
-    }
-
-    #log-out-button {
-        font-size:12px !important;
-        margin-bottom:0%!important;
-        width:100px;
+        width:450px ;
+        margin-left:52px ;
+        margin-top:5px ;
     }
 
     #player {
-      margin-bottom:43px;
+        margin-bottom: 10%;
     }
 
     .copyright{
@@ -168,7 +150,7 @@ a:hover {
 @media only screen and (min-width: 375px) and (max-width : 667px) and (orientation : landscape ) {
 
     #player  {
-        margin-top:42px !important;
+        margin-top:52px !important;
     }
 }
 
@@ -194,10 +176,7 @@ a:hover {
 
     #log-out-button {
         font-size:14px;
-    }
-
-    #player {
-        margin-bottom:-60px !important;
+        margin-bottom:87px !important;
     }
 
     .copyright {
@@ -222,7 +201,7 @@ a:hover {
     }
 
     #player {
-        margin-top:200px !important;
+        margin-top:220px !important;
     }
 }
 /* Iphone 6/7/8 plus portrait mode */
@@ -232,7 +211,7 @@ a:hover {
 @media only screen and (min-width: 375px) and (max-width:812px) and (orientation : portrait) {
     
     #player {
-        margin-top:396px !important;
+        margin-top:411px !important;
     }
 }
 /* Iphone X portrait mode */
@@ -261,7 +240,7 @@ a:hover {
     }
 
     #player {
-        margin-top:23px;
+        margin-top:34px;
     }
 }
 /* Iphone X landscape mode */

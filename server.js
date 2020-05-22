@@ -95,14 +95,12 @@ passport.use(new SpotifyStrategy(
         callbackURL: redirectUri
     },
     function (accessToken, refreshToken, expires_in, profile, done) {
-        console.log(profile)
+
         SpotifyUserModel.findOne(
             {
                 // spotifyId: profile.id,
 
             },
-           
-            
 
             // This function is executed after successful user authorization
             // The user parameter is stores the 
@@ -120,9 +118,9 @@ passport.use(new SpotifyStrategy(
                     email: profile._json.email,
                     token: accessToken,
                     refresh: refreshToken,
-                    expire:expires_in
+                    expire: expires_in
                 });
-               
+
 
                 // Adds the new user signed in to the database
                 newSpotifyUser.save(function (err) {
@@ -139,18 +137,17 @@ passport.use(new SpotifyStrategy(
 ));
 
 // Database connection for development
-mongoose.connect('mongodb://localhost/spotify_users', {
+// mongoose.connect('mongodb://localhost/spotify_users', {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
+
+// Database connection for production
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
+    + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
-
-
-// Database connection for production
-// mongoose.connect(process.env.MONGODB_URI || 'mongodb://' + databaseUser + ':'
-//     + databasePassword + '@ds029605.mlab.com:29605/heroku_wdp5clnd', {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {
